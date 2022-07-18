@@ -3,7 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 const __dirname = path.resolve()
 
-module.exports = {
+export default {
   mode: 'development',
   entry: './src/app.js',
   output: {
