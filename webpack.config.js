@@ -10,6 +10,9 @@ export default {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
+  resolve: {
+    extensions: ['.js'],
+  },
   module: {
     rules: [
       {
@@ -38,4 +41,5 @@ export default {
       }),
     ],
   },
+  devtool: 'eval-cheap-source-map',
 }
