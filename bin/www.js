@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 
-import app from '../backend/app.js'
+import app from '../src/backend/app.js'
+console.log(app)
 import debug from 'debug'
 import http from 'http'
 
