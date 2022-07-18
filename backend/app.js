@@ -4,9 +4,9 @@ import path from 'path'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import dotenv from 'dotenv'
-import { webpack } from 'webpack'
-import webpackConfig from '../webpack.config'
-import { Middleware } from 'webpack-dev-middleware'
+import webpack from 'webpack'
+import webpackConfig from '../webpack.config.js'
+import Middleware from 'webpack-dev-middleware'
 
 const compiler = webpack(webpackConfig)
 
@@ -17,9 +17,6 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
-
-app.use('/', indexRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -30,12 +27,14 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 if (process.env.NODE_ENV === 'development') {
   // 웹팩 설정
   app.use(
-    '/dist',
+    'frontend/dist',
     Middleware(compiler, {
       // webpack-dev-middleware options
     }),
   )
 }
+
+app.use(express.static(path.join(__dirname, 'frontend')))
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -47,3 +46,9 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500)
   res.render('error')
 })
+
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/dist/index.html'))
+})
+
+export default app

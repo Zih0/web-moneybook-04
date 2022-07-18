@@ -5,9 +5,9 @@ const __dirname = path.resolve()
 
 export default {
   mode: 'development',
-  entry: './src/app.js',
+  entry: './frontend/app.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'frontend/dist'),
     filename: 'bundle.js',
   },
   resolve: {
@@ -37,7 +37,7 @@ export default {
     ],
     plugins: [
       new HtmlWebpackPlugin({
-        template: 'src/app.html',
+        template: 'frontend/dist/index.html',
       }),
     ],
   },
