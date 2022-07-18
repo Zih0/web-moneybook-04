@@ -6,6 +6,7 @@ import logger from 'morgan'
 import dotenv from 'dotenv'
 import { webpack } from 'webpack'
 import webpackConfig from '../webpack.config'
+import { Middleware } from 'webpack-dev-middleware'
 
 const compiler = webpack(webpackConfig)
 
@@ -30,7 +31,7 @@ if (process.env.NODE_ENV === 'development') {
   // 웹팩 설정
   app.use(
     '/dist',
-    middleware(compiler, {
+    Middleware(compiler, {
       // webpack-dev-middleware options
     }),
   )
