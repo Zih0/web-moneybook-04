@@ -1,14 +1,15 @@
 import path from 'path'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 const __dirname = path.resolve()
 
 export default {
   mode: 'development',
-  entry: './src/app.js',
+  entry: {
+    main: './src/frontend',
+  },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].js',
+    path: path.resolve('./public/dist'),
   },
   resolve: {
     extensions: ['.js'],
@@ -34,11 +35,6 @@ export default {
           },
         ],
       },
-    ],
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: 'src/app.html',
-      }),
     ],
   },
   devtool: 'eval-cheap-source-map',
