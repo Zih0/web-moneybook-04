@@ -1,9 +1,6 @@
 import path from 'path'
 
-const __dirname = path.resolve()
-
 export default {
-  mode: 'development',
   entry: {
     main: './src/frontend',
   },
@@ -37,5 +34,4 @@ export default {
       },
     ],
   },
-  devtool: 'eval-cheap-source-map',
 }
