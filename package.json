@@ -45,6 +45,7 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-middleware": "^5.3.3"
+    "webpack-dev-middleware": "^5.3.3",
+    "webpack-merge": "^5.8.0"
   }
 }
