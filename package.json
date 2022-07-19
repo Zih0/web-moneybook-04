@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www.js",
-    "dev": "nodemon ./bin/www.js"
+    "start": "NODE_ENV=production node ./bin/www.js",
+    "dev": "NODE_ENV=development nodemon ./bin/www.js",
+    "build": "NODE_ENV=production webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",

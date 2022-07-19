@@ -15,6 +15,8 @@ const compiler = webpack(
   process.env.NODE_ENV === 'development' ? webpackDevConfig : webpackProdConfig,
 )
 
+console.log(process.env.NODE_ENV)
+
 dotenv.config()
 const app = express()
 
@@ -29,10 +31,6 @@ app.use(
     // webpack-dev-middleware options
   }),
 )
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.resolve(__dirname, '../../public')))
-}
 
 app.use(express.static(path.join(__dirname, 'public')))
 
