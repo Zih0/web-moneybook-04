@@ -1,0 +1,49 @@
+@import 'typography.scss';
+
+@mixin display-small-text() {
+  font-family: $font-display;
+  font-size: $display-small-font-size;
+  line-height: $display-small-line-height;
+}
+
+@mixin display-large-text() {
+  font-family: $font-display;
+  font-size: $display-large-font-size;
+  line-height: $display-large-line-height;
+}
+
+@mixin body-regular-text() {
+  font-weight: $font-weight-400;
+  font-size: $font-size-16;
+  line-height: $line-height-24;
+}
+
+@mixin body-medium-text() {
+  font-weight: $font-weight-400;
+  font-size: $font-size-18;
+  line-height: $line-height-24;
+}
+
+@mixin body-large-text() {
+  font-weight: $font-weight-400;
+  font-size: $font-size-22;
+  line-height: $line-height-32;
+}
+
+@mixin bold-small-text() {
+  font-weight: $font-weight-500;
+  font-size: $font-size-12;
+  line-height: $line-height-16;
+}
+
+@mixin bold-medium-text() {
+  font-weight: $font-weight-500;
+  font-size: $font-size-14;
+  line-height: $line-height-24;
+}
+
+@mixin bold-large-text() {
+  font-weight: $font-weight-500;
+  font-size: $font-size-16;
+  line-height: $line-height-24;
+}
