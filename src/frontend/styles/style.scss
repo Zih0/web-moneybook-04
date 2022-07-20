@@ -1,2 +1,17 @@
+@import 'reset.scss';
 @import 'text-style.scss';
 @import 'color.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: $font-main;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
