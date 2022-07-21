@@ -13,12 +13,10 @@ export default class App extends Component {
 
   template() {
     const { pathname } = location
-    let route = false
-    if (pathname === ROUTE.fileText || pathname === ROUTE.calendar || pathname === ROUTE.chart) {
-      route = true
-    }
+    const isRoute =
+      pathname === ROUTE.fileText || pathname === ROUTE.calendar || pathname === ROUTE.chart
 
-    if (route) {
+    if (isRoute) {
       return /*html*/ `
             <header>
             </header>
