@@ -17,3 +17,34 @@ button {
   cursor: pointer;
   border: none;
 }
+
+.life {
+  background-color: $color-category-life;
+}
+.shopping {
+  background-color: $color-category-shopping;
+}
+.allowance {
+  background-color: $color-category-allowance;
+}
+.culture {
+  background-color: $color-category-culture;
+}
+.etc {
+  background-color: $color-category-etc;
+}
+.food {
+  background-color: $color-category-food;
+}
+.health {
+  background-color: $color-category-health;
+}
+.salary {
+  background-color: $color-category-salary;
+}
+.undefined {
+  background-color: $color-category-undefined;
+}
+.traffic {
+  background-color: $color-category-traffic;
+}
