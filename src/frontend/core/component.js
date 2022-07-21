@@ -1,6 +1,7 @@
 export class Component {
-  constructor($target) {
+  constructor($target, props) {
     this.$target = $target
+    this.props = props
     this.state = {}
     this.render()
   }
@@ -9,8 +10,6 @@ export class Component {
     this.setComponent()
     this.setEvent()
   }
-
-  componentDidMount() {}
 
   setEvent() {}
 
