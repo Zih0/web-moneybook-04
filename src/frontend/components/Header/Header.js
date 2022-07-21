@@ -2,6 +2,7 @@ import { Component } from '../../core/component.js'
 import fileText from '../../assets/file-text.svg'
 import calendar from '../../assets/calendar.svg'
 import chart from '../../assets/chart.svg'
+import { ROUTE } from '../../utils/constants.js'
 
 export default class Header extends Component {
   hadnleRoute(e) {
@@ -9,20 +10,7 @@ export default class Header extends Component {
     if (!target) return
 
     const { className } = target
-
-    switch (className) {
-      case 'fileText':
-        history.pushState(null, null, '/')
-        break
-      case 'calendar':
-        history.pushState(null, null, '/calendar')
-        break
-      case 'chart':
-        history.pushState(null, null, '/chart')
-        break
-      default:
-        break
-    }
+    history.pushState(null, null, ROUTE[className])
     this.props.route()
   }
 
