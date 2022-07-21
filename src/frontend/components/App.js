@@ -37,28 +37,27 @@ export default class App extends Component {
 
   setComponent() {
     // 정상적인 URL 경우에만 header컴포넌트 생성
-    const $header = this.$target.querySelector('header')
+    const $header = this.dom.querySelector('header')
     if ($header) {
-      new Header($header, {
-        route: this.route.bind(this),
-      })
+      $header.replaceWith(
+        new Header({
+          route: this.route.bind(this),
+        }).dom,
+      )
     }
 
     // URL에 따른 페이지 라우팅 처리
-    const $main = this.$target.querySelector('.main')
+    const $main = this.dom.querySelector('.main')
     const { pathname } = location
     if (pathname === ROUTE.fileText) {
       // 가계부 페이지
-      $main.innerHTML = '메인'
     } else if (pathname === ROUTE.calendar) {
       // 달력 페이지
-      $main.innerHTML = '달력'
     } else if (pathname === ROUTE.chart) {
       // 차트
-      $main.innerHTML = '차트'
     } else {
       // 404 페이지
-      new ErrorPage($main)
+      $main.replaceWith(new ErrorPage().dom)
     }
   }
 }
