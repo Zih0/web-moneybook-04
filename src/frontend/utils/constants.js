@@ -11,4 +11,10 @@ const CATEGORY = {
   etc: '기타수업',
 }
 
-export { CATEGORY }
+const ROUTE = {
+  fileText: '/',
+  calendar: '/calendar',
+  chart: '/chart',
+}
+
+export { CATEGORY, ROUTE }
