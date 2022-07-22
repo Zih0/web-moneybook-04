@@ -18,8 +18,8 @@ export default class Header extends Component {
   }
 
   setEvent() {
-    this.dom.querySelector('.route').addEventListener('click', this.hadnleRoute.bind(this))
-    this.dom.querySelector('.logo').addEventListener('click', this.hadnleRoute.bind(this))
+    this.querySelector('.route').addEventListener('click', this.hadnleRoute.bind(this))
+    this.querySelector('.logo').addEventListener('click', this.hadnleRoute.bind(this))
   }
 
   template() {

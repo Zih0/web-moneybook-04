@@ -25,9 +25,9 @@ export default class App extends Component {
     const { pathname } = location
     const isRoute =
       pathname === ROUTE.fileText || pathname === ROUTE.calendar || pathname === ROUTE.chart
-    
+
     // 정상적인 URL 경우에만 header컴포넌트 생성
-    const $container = this.dom.querySelector('.container')
+    const $container = this.querySelector('.container')
     if (isRoute) {
       $container.appendChild(
         new Header({
