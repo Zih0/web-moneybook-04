@@ -4,9 +4,6 @@ import ErrorPage from '../pages/ErrorPage.js'
 import { ROUTE } from '../utils/constants.js'
 
 export default class App extends Component {
-  constructor($target, props) {
-    super($target, props)
-  }
   route() {
     this.render()
   }
@@ -45,7 +42,7 @@ export default class App extends Component {
     }
 
     // URL에 따른 페이지 라우팅 처리
-    const $main = this.$target.querySelector('.main')
+    const $main = this.querySelector('.main')
     const { pathname } = location
     if (pathname === ROUTE.fileText) {
       // 가계부 페이지
@@ -62,3 +59,5 @@ export default class App extends Component {
     }
   }
 }
+
+customElements.define('app-root', App)
