@@ -63,3 +63,5 @@ export default class Header extends Component {
     `
   }
 }
+
+customElements.define('transaction-item', TransactionItem)
