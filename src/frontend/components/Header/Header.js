@@ -1,11 +1,11 @@
 import { Component } from '../../core/component.js'
 import { ROUTE } from '../../utils/constants.js'
 import './header.scss'
-import fileText from '../../assets/file-text.svg'
-import calendar from '../../assets/calendar.svg'
-import chart from '../../assets/chart.svg'
-import leftArrow from '../../assets/left-arrow.svg'
-import rightArrow from '../../assets/right-arrow.svg'
+import IconFileText from '../../assets/file-text.svg'
+import IconCalendar from '../../assets/calendar.svg'
+import IconChart from '../../assets/chart.svg'
+import IconLeftArrow from '../../assets/left-arrow.svg'
+import IconRightArrow from '../../assets/right-arrow.svg'
 
 export default class Header extends Component {
   hadnleRoute(e) {
@@ -27,12 +27,12 @@ export default class Header extends Component {
     <header>
       <div class='header-container'>
         <div class='logo'>
-          <button class='fileText'>우아한 가계부</button>
+          <button class='file-text'>우아한 가계부</button>
         </div>
 
         <div class='date-wrap'>
           <button class="arrow">
-              ${leftArrow}
+              ${IconLeftArrow}
           </button>
 
           <div class='text-wrap'>
@@ -41,21 +41,21 @@ export default class Header extends Component {
           </div>
 
           <button class="arrow">
-              ${rightArrow}
+              ${IconRightArrow}
           </button>
         </div>
 
         <div class='menu-wrap route'>
-          <button class="fileText">
-            ${fileText}
+          <button class="file-text">
+            ${IconFileText}
           </button>
 
           <button class="calendar">
-            ${calendar}
+            ${IconCalendar}
           </button>
 
           <button class="chart">
-            ${chart}
+            ${IconChart}
           </button>
         </div>
       </div>

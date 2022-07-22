@@ -12,7 +12,7 @@ const CATEGORY = {
 }
 
 const ROUTE = {
-  fileText: '/',
+  'file-text': '/',
   calendar: '/calendar',
   chart: '/chart',
 }
