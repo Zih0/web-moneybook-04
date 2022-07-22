@@ -59,8 +59,8 @@ export default class TransactionList extends Component {
     const $incomeCheckbox = this.querySelector('#filter-income')
     const $expenseCheckbox = this.querySelector('#filter-expense')
 
-    $incomeCheckbox.addEventListener('change', this.handleChangeIncomeCheckbox.bind(this))
-    $expenseCheckbox.addEventListener('change', this.handleChangeExpenseCheckbox.bind(this))
+    $incomeCheckbox.addEventListener('change', this.handleChangeCheckbox.bind(this))
+    $expenseCheckbox.addEventListener('change', this.handleChangeCheckbox.bind(this))
   }
 
   setComponent() {
@@ -80,14 +80,14 @@ export default class TransactionList extends Component {
     })
   }
 
-  handleChangeIncomeCheckbox(e) {
-    const { checked } = e.target
-    this.setState({ incomeChecked: checked })
-  }
+  handleChangeCheckbox(e) {
+    const { checked, id } = e.target
 
-  handleChangeExpenseCheckbox(e) {
-    const { checked } = e.target
-    this.setState({ expenseChecked: checked })
+    if (id === 'filter-income') {
+      this.setState({ incomeChecked: checked })
+    } else if (id === 'filter-expense') {
+      this.setState({ expenseChecked: checked })
+    }
   }
 
   filterIncomeExpense(transactionDataList) {
