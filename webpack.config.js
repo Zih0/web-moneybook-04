@@ -1,12 +1,14 @@
 import path from 'path'
 
+const __dirname = path.resolve()
+
 export default {
   entry: {
     main: './src/frontend',
   },
   output: {
     filename: '[name].js',
-    path: path.resolve('./public/dist'),
+    path: path.resolve(__dirname, 'public/dist'),
   },
   resolve: {
     extensions: ['.js'],

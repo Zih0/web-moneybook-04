@@ -17,3 +17,5 @@ export default class TransactionItem extends Component {
     `
   }
 }
+
+customElements.define('transaction-item', TransactionItem)

@@ -34,7 +34,7 @@ app.use(
 app.use('/api/transaction', transactionRouter)
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'public/index.html'))
+  res.sendFile(path.resolve(__dirname, `public/index.html`))
 })
 
 export default app
