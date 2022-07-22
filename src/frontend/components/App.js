@@ -1,9 +1,10 @@
 import { Component } from '../core/component.js'
 import Header from './Header/Header.js'
-import ErrorPage from '../pages/ErrorPage.js'
 import { ROUTE } from '../utils/constants.js'
-import TransactionList from './TransactionList/TransactionList.js'
 import MainPage from '../pages/MainPage/MainPage.js'
+import CalendarPage from '../pages/CalendarPage.js'
+import ChartPage from '../pages/ChartPage.js'
+import ErrorPage from '../pages/ErrorPage.js'
 
 export default class App extends Component {
   route() {
@@ -11,23 +12,10 @@ export default class App extends Component {
   }
 
   template() {
-    const { pathname } = location
-    const isRoute =
-      pathname === ROUTE.fileText || pathname === ROUTE.calendar || pathname === ROUTE.chart
-
-    if (isRoute) {
-      return /*html*/ `
-            <header>
-            </header>
-            <div class='main'>
-            </div>
-        `
-    } else {
-      return /*html*/ `
-        <div class='main'>
-        </div>
-      `
-    }
+    return `
+      <div class='container'>
+      </div>
+    `
   }
 
   setEvent() {
@@ -35,30 +23,36 @@ export default class App extends Component {
   }
 
   setComponent() {
-    // // 정상적인 URL 경우에만 header컴포넌트 생성
-    // const $header = this.$target.querySelector('header')
-    // if ($header) {
-    //   new Header($header, {
-    //     route: this.route.bind(this),
-    //   })
-    // }
+    const { pathname } = location
+    const isRoute =
+      pathname === ROUTE['file-text'] || pathname === ROUTE.calendar || pathname === ROUTE.chart
+
+    const $container = this.querySelector('.container')
+    if (!isRoute) {
+      $container.appendChild(
+        new ErrorPage({
+          route: this.route.bind(this),
+        }),
+      )
+      return
+    }
+
+    // 정상적인 URL 경우에만 header컴포넌트 생성
+    $container.appendChild(
+      new Header({
+        route: this.route.bind(this),
+      }),
+    )
 
     // URL에 따른 페이지 라우팅 처리
-    const $main = this.querySelector('.main')
-    const { pathname } = location
-    if (pathname === ROUTE.fileText) {
-      // 가계부 페이지
-      $main.appendChild(new MainPage())
-    } else if (pathname === ROUTE.calendar) {
-      // 달력 페이지
-      $main.innerHTML = '달력'
-    } else if (pathname === ROUTE.chart) {
-      // 차트
-      $main.innerHTML = '차트'
-    } else {
-      // 404 페이지
-      new ErrorPage($main)
+    const exampleObject = {
+      [ROUTE['file-text']]: new MainPage(),
+      [ROUTE.calendar]: new CalendarPage(),
+      [ROUTE.chart]: new ChartPage(),
     }
+
+    const pageComponent = exampleObject[pathname]
+    $container.appendChild(pageComponent)
   }
 }
 

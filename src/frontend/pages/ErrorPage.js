@@ -9,3 +9,4 @@ export default class ErrorPage extends Component {
     `
   }
 }
+customElements.define('error-container', ErrorPage)
