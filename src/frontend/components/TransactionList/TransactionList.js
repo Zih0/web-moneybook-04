@@ -1,5 +1,5 @@
 import { Component } from '../../core/component.js'
-import { getState } from '../../core/observer.js'
+import { getState, subscribe } from '../../core/observer.js'
 import { transactionListState } from '../../stores/transactionStore.js'
 import { calculateTransaction } from '../../utils/priceUtil.js'
 import DateTransactionList from '../DateTransactionList/DateTransactionList.js'
@@ -8,6 +8,12 @@ import IconCheckboxDefault from '../../assets/checkbox-default.svg'
 import IconCheckboxActive from '../../assets/checkbox-active.svg'
 
 export default class TransactionList extends Component {
+  constructor(props) {
+    super(props)
+
+    subscribe(transactionListState, this.render.bind(this))
+  }
+
   initState() {
     this.state = {
       incomeChecked: true,
@@ -49,16 +55,6 @@ export default class TransactionList extends Component {
       `
   }
 
-  handleChangeIncomeCheckbox(e) {
-    const { checked } = e.target
-    this.setState({ incomeChecked: checked })
-  }
-
-  handleChangeExpenseCheckbox(e) {
-    const { checked } = e.target
-    this.setState({ expenseChecked: checked })
-  }
-
   setEvent() {
     const $incomeCheckbox = this.querySelector('#filter-income')
     const $expenseCheckbox = this.querySelector('#filter-expense')
@@ -82,6 +78,16 @@ export default class TransactionList extends Component {
         }),
       )
     })
+  }
+
+  handleChangeIncomeCheckbox(e) {
+    const { checked } = e.target
+    this.setState({ incomeChecked: checked })
+  }
+
+  handleChangeExpenseCheckbox(e) {
+    const { checked } = e.target
+    this.setState({ expenseChecked: checked })
   }
 
   filterIncomeExpense(transactionDataList) {
