@@ -1,0 +1,38 @@
+@import '../../styles/color.scss';
+@import '../../styles/text-style.scss';
+
+.date-transaction-list-wrapper {
+  margin-top: 32px;
+  width: 100%;
+}
+
+.date-transaction-header {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date-transaction-header-date {
+  @include bold-medium-text;
+
+  color: $color-title-active;
+}
+
+.date-transaction-header-day {
+  @include bold-medium-text;
+  margin-left: 8px;
+
+  color: $color-body;
+}
+
+.date-transaction-header-summary {
+  @include bold-medium-text;
+
+  color: $color-body;
+}
+
+.date-transaction-list {
+  margin-top: 20px;
+}
