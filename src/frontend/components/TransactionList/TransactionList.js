@@ -18,9 +18,8 @@ export default class TransactionList extends Component {
   template() {
     const { incomeChecked, expenseChecked } = this.state
     const transactionDataList = getState(transactionListState)
-    const transactionDataLength = transactionDataList.length
-
-    const classifiedData = this.classifyTransactionDataByDate(transactionDataList)
+    const filteredTransactionList = this.filterIncomeExpense(transactionDataList)
+    const transactionDataLength = filteredTransactionList.length
 
     const [totalIncome, totalExpense] = calculateTransaction(transactionDataList)
 
@@ -43,9 +42,7 @@ export default class TransactionList extends Component {
               </div>
               </div>
             <div class="transaction-list-wrapper">
-                ${Object.keys(classifiedData)
-                  .map((_) => `<div class="transaction-date-list"></div>`)
-                  .join('')}
+                
             </div>
           </div>
         </div>
@@ -72,12 +69,14 @@ export default class TransactionList extends Component {
 
   setComponent() {
     const transactionDataList = getState(transactionListState)
-    const classifiedData = this.classifyTransactionDataByDate(transactionDataList)
 
-    const $replaceElementList = this.querySelectorAll(`.transaction-date-list`)
+    const filteredTransactionList = this.filterIncomeExpense(transactionDataList)
+    const classifiedData = this.classifyTransactionDataByDate(filteredTransactionList)
+
+    const $transactionList = this.querySelector(`.transaction-list-wrapper`)
 
     Object.values(classifiedData).forEach((transactionList, idx) => {
-      $replaceElementList[idx].replaceWith(
+      $transactionList.appendChild(
         new DateTransactionList({
           transactionList,
         }),
@@ -85,10 +84,10 @@ export default class TransactionList extends Component {
     })
   }
 
-  classifyTransactionDataByDate(transactionDataList) {
+  filterIncomeExpense(transactionDataList) {
     const { incomeChecked, expenseChecked } = this.state
 
-    const filteredTransactionDataList = transactionDataList.filter((transactionData) => {
+    return transactionDataList.filter((transactionData) => {
       if (incomeChecked && expenseChecked) {
         return true
       }
@@ -103,9 +102,11 @@ export default class TransactionList extends Component {
 
       return false
     })
+  }
 
+  classifyTransactionDataByDate(transactionDataList) {
     const newData = {}
-    filteredTransactionDataList.forEach((transactionData) => {
+    transactionDataList.forEach((transactionData) => {
       if (newData[transactionData.payment_date]) {
         newData[transactionData.payment_date].push(transactionData)
       } else {
