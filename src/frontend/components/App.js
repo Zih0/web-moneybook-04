@@ -12,23 +12,10 @@ export default class App extends Component {
   }
 
   template() {
-    const { pathname } = location
-    const isRoute =
-      pathname === ROUTE.fileText || pathname === ROUTE.calendar || pathname === ROUTE.chart
-
-    if (isRoute) {
-      return /*html*/ `
-            <header>
-            </header>
-            <div class='main'>
-            </div>
-        `
-    } else {
-      return /*html*/ `
-        <div class='main'>
-        </div>
-      `
-    }
+    return `
+      <div class='container'>
+      </div>
+    `
   }
 
   setEvent() {
@@ -36,10 +23,14 @@ export default class App extends Component {
   }
 
   setComponent() {
+    const { pathname } = location
+    const isRoute =
+      pathname === ROUTE.fileText || pathname === ROUTE.calendar || pathname === ROUTE.chart
     // 정상적인 URL 경우에만 header컴포넌트 생성
-    const $header = this.dom.querySelector('header')
-    if ($header) {
-      $header.replaceWith(
+
+    const $container = this.dom.querySelector('.container')
+    if (isRoute) {
+      $container.appendChild(
         new Header({
           route: this.route.bind(this),
         }).dom,
@@ -47,8 +38,6 @@ export default class App extends Component {
     }
 
     // URL에 따른 페이지 라우팅 처리
-    const $main = this.dom.querySelector('.main')
-    const { pathname } = location
     if (pathname === ROUTE.fileText) {
       // 가계부 페이지
     } else if (pathname === ROUTE.calendar) {
@@ -57,7 +46,7 @@ export default class App extends Component {
       // 차트
     } else {
       // 404 페이지
-      $main.replaceWith(new ErrorPage().dom)
+      $container.appendChild(new ErrorPage().dom)
     }
   }
 }
