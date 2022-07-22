@@ -1,15 +1,16 @@
-export class Component {
-  dom
+export class Component extends HTMLElement {
   constructor(props) {
-    this.$template = document.createElement('template')
+    super()
     this.props = props
-    this.state = {}
+    this.initState()
     this.render()
   }
 
+  // state 초기화
+  initState() {}
+
   render() {
-    this.$template.innerHTML = this.template()
-    this.dom = this.$template.content.cloneNode(true)
+    this.innerHTML = this.template()
     this.setComponent()
     this.setEvent()
   }
