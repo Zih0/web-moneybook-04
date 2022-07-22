@@ -1,9 +1,10 @@
 import { Component } from '../core/component.js'
 import Header from './Header/Header.js'
-import ErrorPage from '../pages/ErrorPage.js'
 import { ROUTE } from '../utils/constants.js'
-import TransactionList from './TransactionList/TransactionList.js'
 import MainPage from '../pages/MainPage/MainPage.js'
+import CalendarPage from '../pages/CalendarPage.js'
+import ChartPage from '../pages/ChartPage.js'
+import ErrorPage from '../pages/ErrorPage.js'
 
 export default class App extends Component {
   route() {
@@ -26,28 +27,32 @@ export default class App extends Component {
     const isRoute =
       pathname === ROUTE['file-text'] || pathname === ROUTE.calendar || pathname === ROUTE.chart
 
-    // 정상적인 URL 경우에만 header컴포넌트 생성
     const $container = this.querySelector('.container')
-    if (isRoute) {
+    if (!isRoute) {
       $container.appendChild(
-        new Header({
+        new ErrorPage({
           route: this.route.bind(this),
         }),
       )
+      return
     }
 
+    // 정상적인 URL 경우에만 header컴포넌트 생성
+    $container.appendChild(
+      new Header({
+        route: this.route.bind(this),
+      }),
+    )
+
     // URL에 따른 페이지 라우팅 처리
-    if (pathname === ROUTE['file-text']) {
-      // 가계부 페이지
-      $container.appendChild(new MainPage())
-    } else if (pathname === ROUTE.calendar) {
-      // 달력 페이지
-    } else if (pathname === ROUTE.chart) {
-      // 차트
-    } else {
-      // 404 페이지
-      $container.appendChild(new ErrorPage())
+    const exampleObject = {
+      [ROUTE['file-text']]: new MainPage(),
+      [ROUTE.calendar]: new CalendarPage(),
+      [ROUTE.chart]: new ChartPage(),
     }
+
+    const pageComponent = exampleObject[pathname]
+    $container.appendChild(pageComponent)
   }
 }
 
