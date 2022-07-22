@@ -24,7 +24,7 @@ export default class App extends Component {
   setComponent() {
     const { pathname } = location
     const isRoute =
-      pathname === ROUTE.fileText || pathname === ROUTE.calendar || pathname === ROUTE.chart
+      pathname === ROUTE['file-text'] || pathname === ROUTE.calendar || pathname === ROUTE.chart
 
     // 정상적인 URL 경우에만 header컴포넌트 생성
     const $container = this.querySelector('.container')
@@ -37,7 +37,7 @@ export default class App extends Component {
     }
 
     // URL에 따른 페이지 라우팅 처리
-    if (pathname === ROUTE.fileText) {
+    if (pathname === ROUTE['file-text']) {
       // 가계부 페이지
       $container.appendChild(new MainPage())
     } else if (pathname === ROUTE.calendar) {
