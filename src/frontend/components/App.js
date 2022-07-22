@@ -48,7 +48,7 @@ export default class App extends Component {
     const { pathname } = location
     if (pathname === ROUTE.fileText) {
       // 가계부 페이지
-      $main.appendChild(new MainPage().dom)
+      $main.appendChild(new MainPage())
     } else if (pathname === ROUTE.calendar) {
       // 달력 페이지
       $main.innerHTML = '달력'

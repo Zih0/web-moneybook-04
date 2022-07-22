@@ -33,7 +33,7 @@ export default class DateTransactionList extends Component {
 
   setComponent() {
     const { transactionList } = this.props
-    const $trnasactionList = this.dom.querySelector(`.date-transaction-list`)
+    const $trnasactionList = this.querySelector(`.date-transaction-list`)
 
     transactionList.forEach((transactionItem) => {
       $trnasactionList.appendChild(
@@ -42,7 +42,7 @@ export default class DateTransactionList extends Component {
           title: transactionItem.title,
           payment: transactionItem.payment,
           price: transactionItem.price,
-        }).dom,
+        }),
       )
     })
   }
@@ -57,3 +57,5 @@ export default class DateTransactionList extends Component {
     return [month, date, day]
   }
 }
+
+customElements.define('datetransaction-list', DateTransactionList)

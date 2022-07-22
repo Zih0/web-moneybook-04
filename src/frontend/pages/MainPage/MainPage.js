@@ -12,12 +12,10 @@ export default class MainPage extends Component {
   }
 
   setComponent() {
-    const $trnasactionList = this.dom.querySelector('.transaction-list-wrapper')
+    const $trnasactionList = this.querySelector('.transaction-list-wrapper')
 
-    $trnasactionList.replaceWith(
-      new TransactionList({
-        reRender: this.render.bind(this),
-      }).dom,
-    )
+    $trnasactionList.replaceWith(new TransactionList())
   }
 }
+
+customElements.define('main-page', MainPage)
