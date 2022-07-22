@@ -44,5 +44,9 @@
     color: $color-primary-300;
 
     cursor: pointer;
+
+    &.unchecked {
+      color: $color-label;
+    }
   }
 }

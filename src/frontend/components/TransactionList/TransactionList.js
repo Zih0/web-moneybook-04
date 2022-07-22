@@ -31,12 +31,12 @@ export default class TransactionList extends Component {
               <span class="transaction-count-text">전체 내역 ${transactionDataLength}건</span>
               <div class="transaction-list-filter">
                 <input type="checkbox" id="filter-income" ${incomeChecked ? 'checked' : ''} />
-                <label for="filter-income">
+                <label for="filter-income" class="${!incomeChecked ? 'unchecked' : ''}">
                   <i>${incomeChecked ? IconCheckboxActive : IconCheckboxDefault}</i>
                   수입 ${totalIncome}
                 </label>
                 <input type="checkbox" id="filter-expense" ${expenseChecked ? 'checked' : ''} />
-                <label for="filter-expense">
+                <label for="filter-expense"  class="${!expenseChecked ? 'unchecked' : ''}">
                 <i>${expenseChecked ? IconCheckboxActive : IconCheckboxDefault}</i>
                   지출 ${totalExpense}
                 </label>
