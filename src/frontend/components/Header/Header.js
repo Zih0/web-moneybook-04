@@ -42,7 +42,7 @@ export default class Header extends Component {
         </div>
 
         <div class='menu-wrap route'>
-          <button class="file-text">
+          <button class="file-text" id='file-text'>
             ${IconFileText}
           </button>
 
@@ -63,6 +63,20 @@ export default class Header extends Component {
     const routes = this.querySelectorAll('.route')
     routes.forEach((route) => route.addEventListener('click', this.hadnleRoute.bind(this)))
     this.querySelector('.date-wrap').addEventListener('click', this.handleDate.bind(this))
+  }
+
+  setComponent() {
+    const $removeTarget = this.querySelector('.active')
+    if ($removeTarget) {
+      $removeTarget.classList.remove('active')
+    }
+
+    let { pathname } = location
+    pathname = pathname.replace(/^./, '')
+    pathname = pathname === '' ? '#file-text' : `.${pathname}`
+
+    const $target = this.querySelector(pathname)
+    $target.classList.add('active')
   }
 
   hadnleRoute(e) {
