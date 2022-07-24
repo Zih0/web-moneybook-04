@@ -74,7 +74,7 @@ export default class DoughnutChart extends Component {
       [0],
     )
 
-    const svg = this.querySelector('.doughnut')
+    const $svg = this.querySelector('.doughnut')
 
     prices.forEach((price, i) => {
       // 비율
@@ -83,18 +83,18 @@ export default class DoughnutChart extends Component {
       const emptySpace = diameter - fillSpace
       const offset = (acc[i] / totalSum) * diameter
 
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
-      circle.setAttribute('cx', '50')
-      circle.setAttribute('cy', '50')
-      circle.setAttribute('r', radius)
-      circle.setAttribute('fill', 'transparent')
-      circle.classList.add(categories[i])
+      const $circle = document.createElementNS('http://www.w3.org/2000/$svg', 'circle')
+      $circle.setAttribute('cx', '50')
+      $circle.setAttribute('cy', '50')
+      $circle.setAttribute('r', radius)
+      $circle.setAttribute('fill', 'transparent')
+      $circle.classList.add(categories[i])
 
-      circle.setAttribute('stroke-width', '15')
-      circle.setAttribute('stroke-dasharray', `${fillSpace} ${emptySpace}`)
-      circle.setAttribute('stroke-dashoffset', -offset)
+      $circle.setAttribute('stroke-width', '15')
+      $circle.setAttribute('stroke-dasharray', `${fillSpace} ${emptySpace}`)
+      $circle.setAttribute('stroke-dashoffset', -offset)
 
-      svg.appendChild(circle)
+      $svg.appendChild($circle)
     })
   }
 }
