@@ -38,7 +38,7 @@ button {
 .date-wrap {
   display: flex;
   align-items: center;
-  .arrow {
+  button {
     width: 30px;
     display: flex;
     align-items: center;
@@ -71,6 +71,13 @@ button {
     svg {
       height: 24px;
       width: 24px;
+      path {
+        stroke: $color-line;
+      }
+    }
+  }
+  .active {
+    svg {
       path {
         stroke: $color-off-white;
       }
