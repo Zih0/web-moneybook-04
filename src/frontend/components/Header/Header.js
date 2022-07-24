@@ -80,7 +80,7 @@ export default class Header extends Component {
   }
 
   hadnleRoute(e) {
-    const $target = e.$target.closest('button')
+    const $target = e.target.closest('button')
     if (!$target) return
 
     const { className } = $target
@@ -100,15 +100,18 @@ export default class Header extends Component {
   }
 
   makeCalendar(year, month, className) {
-    let nextYear = year
-    let nextMonth = className === 'left-arrow' ? month - 1 : month + 1
+    const TWELEVE_MONTH = 12
+    const ONE_MONTH = 1
 
-    if (nextMonth > 12) {
-      nextMonth = 1
-      nextYear += 1
-    } else if (nextMonth < 1) {
-      nextMonth = 12
-      nextYear -= 1
+    let nextYear = year
+    let nextMonth = className === 'left-arrow' ? month - ONE_MONTH : month + ONE_MONTH
+
+    if (nextMonth > TWELEVE_MONTH) {
+      nextMonth = ONE_MONTH
+      nextYear += ONE_MONTH
+    } else if (nextMonth < ONE_MONTH) {
+      nextMonth = TWELEVE_MONTH
+      nextYear -= ONE_MONTH
     }
 
     return { nextYear, nextMonth }
