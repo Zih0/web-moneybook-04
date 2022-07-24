@@ -60,8 +60,8 @@ export default class Header extends Component {
   }
 
   setEvent() {
-    const routes = this.querySelectorAll('.route')
-    routes.forEach((route) => route.addEventListener('click', this.hadnleRoute.bind(this)))
+    const $routes = this.querySelectorAll('.route')
+    $routes.forEach((route) => route.addEventListener('click', this.hadnleRoute.bind(this)))
     this.querySelector('.date-wrap').addEventListener('click', this.handleDate.bind(this))
   }
 
@@ -80,10 +80,10 @@ export default class Header extends Component {
   }
 
   hadnleRoute(e) {
-    const target = e.target.closest('button')
-    if (!target) return
+    const $target = e.$target.closest('button')
+    if (!$target) return
 
-    const { className } = target
+    const { className } = $target
     history.pushState(null, null, ROUTE[className])
     this.props.route()
   }
