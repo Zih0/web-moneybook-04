@@ -76,26 +76,21 @@ export default class DoughnutChart extends Component {
 
     const $svg = this.querySelector('.doughnut')
 
-    prices.forEach((price, i) => {
+    const $circles = prices.reduce((circles, price, idx) => {
       // 비율
       const ratio = price / totalSum
       const fillSpace = diameter * ratio
       const emptySpace = diameter - fillSpace
-      const offset = (acc[i] / totalSum) * diameter
+      const offset = (acc[idx] / totalSum) * diameter
 
-      const $circle = document.createElementNS('http://www.w3.org/2000/$svg', 'circle')
-      $circle.setAttribute('cx', '50')
-      $circle.setAttribute('cy', '50')
-      $circle.setAttribute('r', radius)
-      $circle.setAttribute('fill', 'transparent')
-      $circle.classList.add(categories[i])
+      const $circle = `<circle class="${
+        categories[idx]
+      }" cx="50" cy="50" r=${radius} fill="transparent" stroke-width="15" stroke-dasharray="${fillSpace} ${emptySpace}" stroke-dashoffset="${-offset}"></circle>`
 
-      $circle.setAttribute('stroke-width', '15')
-      $circle.setAttribute('stroke-dasharray', `${fillSpace} ${emptySpace}`)
-      $circle.setAttribute('stroke-dashoffset', -offset)
+      return (circles += $circle)
+    }, '')
 
-      $svg.appendChild($circle)
-    })
+    $svg.innerHTML = $circles
   }
 }
 
