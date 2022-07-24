@@ -22,7 +22,7 @@ export default class Header extends Component {
     return /*html*/ `
     <header>
       <div class='header-container'>
-        <div class='logo'>
+        <div class='logo route'>
           <button class='file-text'>우아한 가계부</button>
         </div>
 
@@ -60,8 +60,8 @@ export default class Header extends Component {
   }
 
   setEvent() {
-    this.querySelector('.route').addEventListener('click', this.hadnleRoute.bind(this))
-    this.querySelector('.logo').addEventListener('click', this.hadnleRoute.bind(this))
+    const routes = this.querySelectorAll('.route')
+    routes.forEach((route) => route.addEventListener('click', this.hadnleRoute.bind(this)))
     this.querySelector('.date-wrap').addEventListener('click', this.handleDate.bind(this))
   }
 
