@@ -8,7 +8,7 @@ import webpack from 'webpack'
 import webpackDevConfig from '../../webpack.dev.js'
 import webpackProdConfig from '../../webpack.prod.js'
 import Middleware from 'webpack-dev-middleware'
-import { transactionRouter } from '../backend/routes/transaction.js'
+import { transactionRouter } from './routes/transactionHistory.js'
 
 dotenv.config()
 const __dirname = path.resolve()
