@@ -24,6 +24,9 @@
 .doughnut-price-total {
   @include body-large-text;
 
+  margin-bottom: 32px;
+  margin-left: 16px;
+
   color: $color-title-active;
 }
 
@@ -33,6 +36,8 @@
   padding: 16px;
 
   display: flex;
+
+  border-bottom: 1px solid $color-line;
 }
 
 .category-chip {
