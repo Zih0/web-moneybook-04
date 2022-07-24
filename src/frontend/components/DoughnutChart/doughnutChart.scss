@@ -34,10 +34,16 @@
   @include body-medium-text;
 
   padding: 16px;
-
   display: flex;
-
   border-bottom: 1px solid $color-line;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $color-background;
+  }
 }
 
 .category-chip {
