@@ -1,6 +1,7 @@
 @import '../../styles/color.scss';
 @import '../../styles/typography.scss';
 @import '../../styles/text-style.scss';
+@import '../../styles/varibles.scss';
 
 .paymentbar-container {
   width: 100%;
@@ -50,6 +51,7 @@
 }
 
 .form-element-title {
+  @include user-select-none;
   font-size: 0.9rem;
   color: $color-primary-300;
   width: 100%;
@@ -118,6 +120,7 @@
 }
 
 .category-select {
+  @include user-select-none;
   @include body-regular-text;
 
   white-space: nowrap;
