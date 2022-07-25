@@ -6,6 +6,7 @@ import DateTransactionList from '../DateTransactionList/DateTransactionList.js'
 import './transactionList.scss'
 import IconCheckboxDefault from '../../assets/checkbox-default.svg'
 import IconCheckboxActive from '../../assets/checkbox-active.svg'
+import { dateState } from '../../stores/dateStore.js'
 
 export default class TransactionList extends Component {
   constructor(props) {
