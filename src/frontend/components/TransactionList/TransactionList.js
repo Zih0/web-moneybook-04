@@ -1,7 +1,7 @@
 import { Component } from '../../core/component.js'
 import { getState, subscribe } from '../../core/observer.js'
 import { transactionListState } from '../../stores/transactionStore.js'
-import { calculateTransaction } from '../../utils/priceUtil.js'
+import { calculateTransaction, classifyTransactionDataByDate } from '../../utils/transactionUtil.js'
 import DateTransactionList from '../DateTransactionList/DateTransactionList.js'
 import './transactionList.scss'
 import IconCheckboxDefault from '../../assets/checkbox-default.svg'
@@ -48,7 +48,6 @@ export default class TransactionList extends Component {
               </div>
               </div>
             <div class="transaction-list-wrapper">
-                
             </div>
           </div>
         </div>
@@ -67,7 +66,7 @@ export default class TransactionList extends Component {
     const transactionDataList = getState(transactionListState)
 
     const filteredTransactionList = this.filterIncomeExpense(transactionDataList)
-    const classifiedData = this.classifyTransactionDataByDate(filteredTransactionList)
+    const classifiedData = classifyTransactionDataByDate(filteredTransactionList)
 
     const $transactionList = this.querySelector(`.transaction-list-wrapper`)
 
@@ -108,19 +107,6 @@ export default class TransactionList extends Component {
 
       return false
     })
-  }
-
-  classifyTransactionDataByDate(transactionDataList) {
-    const newData = {}
-    transactionDataList.forEach((transactionData) => {
-      if (newData[transactionData.payment_date]) {
-        newData[transactionData.payment_date].push(transactionData)
-      } else {
-        newData[transactionData.payment_date] = [transactionData]
-      }
-    })
-
-    return newData
   }
 }
 
