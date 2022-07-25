@@ -112,3 +112,15 @@
     }
   }
 }
+
+.form-element-dropdown {
+  position: relative;
+}
+
+.category-select {
+  @include body-regular-text;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
