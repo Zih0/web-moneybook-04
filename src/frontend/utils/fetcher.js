@@ -7,29 +7,27 @@ const HTTP_METHOD = {
   DELETE: 'DELETE',
 }
 
-const fetchWrapper = (url, method, body) =>
-  new Promise((resolve, reject) => {
-    fetch(BASE_URL + url, {
+const fetchWrapper = async (url, method, body) => {
+  try {
+    const res = await fetch(BASE_URL + url, {
       method,
       headers: {
         'Content-Type': 'application/json',
       },
       body: body ? JSON.stringify(body) : undefined,
     })
-      .then((res) => {
-        if (!res.ok) {
-          throw res.json()
-        }
-        resolve(res.json())
-      })
-      .catch((err) => err)
-      .then((err) => {
-        if (err) {
-          const { message } = err
-          reject(message)
-        }
-      })
-  })
+
+    if (!res.ok) {
+      throw res.json()
+    }
+
+    return await res.json()
+  } catch (err) {
+    const { message } = err
+
+    return message
+  }
+}
 
 const fetcher = {
   get: (url) => fetchWrapper(url, HTTP_METHOD.GET),
