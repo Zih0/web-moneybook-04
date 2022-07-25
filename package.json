@@ -44,10 +44,10 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "mysql2": "^2.3.3",
     "svg-inline-loader": "^0.8.2",
     "webpack-cli": "^4.10.0",
     "webpack-dev-middleware": "^5.3.3",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.8.0",
+    "zihorm": "^1.0.3-beta"
   }
 }
