@@ -5,8 +5,18 @@ import MainPage from '../pages/MainPage/MainPage.js'
 import CalendarPage from '../pages/CalendarPage/CalendarPage.js'
 import ChartPage from '../pages/ChartPage/ChartPage.js'
 import ErrorPage from '../pages/ErrorPage.js'
+import { transactionListState } from '../stores/transactionStore.js'
+import { dateState } from '../stores/dateStore.js'
+import { getTransactionHistoryList } from '../api/transactionHistory.js'
+import { getState, setState, subscribe } from '../core/observer.js'
 
 export default class App extends Component {
+  constructor() {
+    super()
+
+    subscribe(dateState, this.render.bind(this))
+  }
+
   route() {
     this.render()
   }
@@ -53,6 +63,13 @@ export default class App extends Component {
 
     const pageComponent = exampleObject[pathname]
     $container.appendChild(pageComponent)
+  }
+
+  async componentDidMount() {
+    const { year, month } = getState(dateState)
+    const setTransactionListState = setState(transactionListState)
+    const transactionListData = await getTransactionHistoryList(year, month)
+    setTransactionListState(transactionListData)
   }
 }
 
