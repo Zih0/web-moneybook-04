@@ -12,8 +12,7 @@ import './calendarPage.scss'
 export default class CalendarPage extends Component {
   constructor() {
     super()
-
-    subscribe(dateState, this.render.bind(this))
+    subscribe(transactionListState, this.render.bind(this))
   }
   template() {
     const dateData = getState(dateState)
