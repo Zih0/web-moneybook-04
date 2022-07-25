@@ -2,7 +2,7 @@ import { Component } from '../core/component.js'
 import Header from './Header/Header.js'
 import { ROUTE } from '../utils/constants.js'
 import MainPage from '../pages/MainPage/MainPage.js'
-import CalendarPage from '../pages/CalendarPage.js'
+import CalendarPage from '../pages/CalendarPage/CalendarPage.js'
 import ChartPage from '../pages/ChartPage/ChartPage.js'
 import ErrorPage from '../pages/ErrorPage.js'
 

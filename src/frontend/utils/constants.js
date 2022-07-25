@@ -11,10 +11,12 @@ const CATEGORY = {
   etc: '기타수업',
 }
 
+const KR_WEEK = ['일', '월', '화', '수', '목', '금', '토']
+
 const ROUTE = {
   'file-text': '/',
   calendar: '/calendar',
   chart: '/chart',
 }
 
-export { CATEGORY, ROUTE }
+export { CATEGORY, ROUTE, KR_WEEK }
