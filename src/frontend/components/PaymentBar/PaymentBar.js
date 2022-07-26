@@ -26,7 +26,7 @@ export default class PaymentBar extends Component {
         <form class='form-wrapper'>
             <div class='form-element'>
                 <span class='form-element-title'>일자</span>
-                <input class='form-element-input' id='paymentDate' placeholder='yyyymmdd' value=${paymentDate}>
+                <input class='form-element-input' id='paymentDate' placeholder='yyyymmdd' maxlength='10' value=${paymentDate}>
             </div>
             <div class='form-element category-form'>
                 <span class='form-element-title'>분류</span>
@@ -61,7 +61,7 @@ export default class PaymentBar extends Component {
                         <span>원</span>
                     </div>
                 </div>
-            <button class='form-button'>
+            <button class='form-button' disabled>
             ${plus}
             </button>
         </form>
@@ -70,24 +70,29 @@ export default class PaymentBar extends Component {
   }
 
   setEvent() {
+    // 각 입력 필드별로 다른 예외 처리를 해야하므로 각각의 이벤트 할당
+
+    const $paymentDate = this.querySelector('#paymentDate')
+    $paymentDate.addEventListener('keyup', this.handleInputPaymentDate.bind(this))
+    $paymentDate.addEventListener('change', this.handleInputPaymentDateState.bind(this))
+
+    this.querySelector('#title').addEventListener('change', this.handleInputTitle.bind(this))
+
     const $categorySelectList = this.querySelectorAll('.select-dropdown')
     $categorySelectList.forEach((item) =>
       item.addEventListener('click', this.handleClickCategorySelect.bind(this)),
     )
-
-    const $formInput = this.querySelectorAll('.form-element-input')
-    $formInput.forEach(($input) => $input.addEventListener('change', this.handleInput.bind(this)))
   }
 
   setComponent() {
     const $categoryDropdownElement = this.querySelector('.category-dropdown-category')
     $categoryDropdownElement.appendChild(
-      new CategoryDropdown({ setCategoryItem: this.setCategoryItem.bind(this) }),
+      new CategoryDropdown({ handleInputCategory: this.handleInputCategory.bind(this) }),
     )
 
     const $paymentDropdownElement = this.querySelector('.category-dropdown-payment')
     $paymentDropdownElement.appendChild(
-      new PaymentDropdown({ setPaymentItem: this.setPaymentItem.bind(this) }),
+      new PaymentDropdown({ handleInputPaymentId: this.handleInputPaymentId.bind(this) }),
     )
   }
 
@@ -99,23 +104,49 @@ export default class PaymentBar extends Component {
     }
   }
 
-  setCategoryItem(selectedItem, option) {
+  // 날짜 입력 값 정규 표현식
+  handleInputPaymentDate(e) {
+    e.target.value = e.target.value
+      .replace(/[^0-9]/g, '')
+      .replace(/^(\d{0,4})(\d{0,2})(\d{0,2})$/g, '$1-$2-$3')
+      .replace(/\-{1,2}$/g, '')
+      .replace()
+  }
+
+  // 필드 입력 관련 함수
+
+  // 날짜 입력 폼
+  handleInputPaymentDateState(e) {
+    this.setState({
+      paymentDate: e.target.value,
+    })
+  }
+
+  // 카테고리 입력 폼
+  handleInputCategory(selectedItem, option) {
     this.setState({
       category: selectedItem,
       option: option,
     })
   }
 
-  setPaymentItem(selectedItem) {
+  // 내용 입력 폼
+  handleInputTitle(e) {
+    this.setState({
+      title: e.target.value,
+    })
+  }
+
+  // 결제수단 입력 폼
+  handleInputPaymentId(selectedItem) {
     this.setState({
       payment_id: 2,
     })
   }
 
-  handleInput(e) {
-    const { id } = e.target
+  handleInputPrice(e) {
     this.setState({
-      [id]: e.target.value,
+      title: e.target.value,
     })
   }
 }
