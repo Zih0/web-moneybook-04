@@ -73,11 +73,11 @@ export default class App extends Component {
     const { pathname } = location
     const { year, month } = getState(dateState)
 
-    if (pathname === ROUTE['file-text'] || pathname === ROUTE.calendar) {
-      const setTransactionListState = setState(transactionListState)
-      const transactionListData = await getTransactionHistoryList(year, month)
-      setTransactionListState(transactionListData)
-    } else if (pathname === ROUTE.chart) {
+    const setTransactionListState = setState(transactionListState)
+    const transactionListData = await getTransactionHistoryList(year, month)
+    setTransactionListState(transactionListData)
+
+    if (pathname === ROUTE.chart) {
       const setExpenseTransactionListState = setState(expenseTransactionListState)
       const expenseTransactionListData = await getExpenseTransactionHistoryList(year, month)
       setExpenseTransactionListState(expenseTransactionListData)
