@@ -8,12 +8,14 @@ import IconRightArrow from '../../assets/right-arrow.svg'
 import { getState, subscribe, setState } from '../../core/observer.js'
 import { dateState } from '../../stores/dateStore.js'
 import './header.scss'
+import { selectedCategoryState } from '../../stores/chartStore.js'
 
 export default class Header extends Component {
   constructor(props) {
     super(props)
     subscribe(dateState, this.render.bind(this))
     this.setDate = setState(dateState)
+    this.setSelectedCategory = setState(selectedCategoryState)
   }
 
   template() {
@@ -97,6 +99,7 @@ export default class Header extends Component {
     const { nextYear, nextMonth } = this.makeCalendar(year, month, className)
 
     this.setDate({ year: nextYear, month: nextMonth })
+    this.setSelectedCategory('')
   }
 
   makeCalendar(year, month, className) {

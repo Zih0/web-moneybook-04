@@ -9,8 +9,3 @@ export const selectedCategoryState = initState({
   key: 'chart/selectedCategoryState',
   defaultValue: '',
 })
-
-export const selectedCategoryTransactionListState = initState({
-  key: 'chart/selectedCategoryTransactionListState',
-  defaultValue: [],
-})
