@@ -6,4 +6,10 @@ const getTransactionHistoryList = async (year, month) => {
   return data ?? []
 }
 
-export { getTransactionHistoryList }
+const getExpenseTransactionHistoryList = async (year, month) => {
+  const { data } = await fetcher.get(`/transaction/category?year=${year}&month=${month}`)
+
+  return data ?? []
+}
+
+export { getTransactionHistoryList, getExpenseTransactionHistoryList }

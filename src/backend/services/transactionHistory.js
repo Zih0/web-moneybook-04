@@ -3,6 +3,7 @@ import zihorm from '../config/db.js'
 import TransactionHistory from '../models/transactionHistory.js'
 
 const TransactionService = {
+  // 메인, 달력 페이지를 위한 get 요청, 수입,지출 거래 내역
   getTransactionList: async (year, month) => {
     const response = await TransactionHistory.findAll({
       attributes: [
