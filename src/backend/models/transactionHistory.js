@@ -8,6 +8,10 @@ const TransactionHistory = zihorm.define('transaction_history', {
     autoIncrement: true,
     primaryKey: true,
   },
+  payment_date: {
+    field: 'payment_date',
+    type: DataTypes.DATE,
+  },
   category: {
     field: 'category',
     type: DataTypes.STRING(10),
