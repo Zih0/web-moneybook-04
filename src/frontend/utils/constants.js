@@ -1,10 +1,10 @@
-const INCOME = {
+const CATEGORY_INCOME = {
   salary: '월급',
   allowance: '용돈',
   etc: '기타수입',
 }
 
-const EXPENSE = {
+const CATEGORY_EXPENSE = {
   life: '생활',
   food: '식비',
   traffic: '교통',
@@ -15,8 +15,8 @@ const EXPENSE = {
 }
 
 const CATEGORY = {
-  ...INCOME,
-  ...EXPENSE,
+  ...CATEGORY_INCOME,
+  ...CATEGORY_EXPENSE,
 }
 
 const ROUTE = {
@@ -25,4 +25,4 @@ const ROUTE = {
   chart: '/chart',
 }
 
-export { CATEGORY, ROUTE, INCOME, EXPENSE }
+export { CATEGORY, ROUTE, CATEGORY_INCOME, CATEGORY_EXPENSE }

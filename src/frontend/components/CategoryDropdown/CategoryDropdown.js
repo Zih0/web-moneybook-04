@@ -1,5 +1,5 @@
 import { Component } from '../../core/component.js'
-import { INCOME, EXPENSE } from '../../utils/constants.js'
+import { CATEGORY_INCOME, CATEGORY_EXPENSE } from '../../utils/constants.js'
 import './categorydropdown.scss'
 
 export default class CategoryDropdown extends Component {
@@ -11,12 +11,12 @@ export default class CategoryDropdown extends Component {
     return /*html*/ `
       <ul class="dropdown-ul category-select">
         <div class="dropdown-title expense">지출</div>
-        ${Object.keys(EXPENSE)
-          .map((key) => ` <li class="dropdown-li false" id=${key}>${EXPENSE[key]}</li>`)
+        ${Object.keys(CATEGORY_EXPENSE)
+          .map((key) => ` <li class="dropdown-li false" id=${key}>${CATEGORY_EXPENSE[key]}</li>`)
           .join('')}
         <div class="dropdown-title income">수입</div>
-        ${Object.keys(INCOME)
-          .map((key) => ` <li class="dropdown-li true" id=${key}>${INCOME[key]}</li>`)
+        ${Object.keys(CATEGORY_INCOME)
+          .map((key) => ` <li class="dropdown-li true" id=${key}>${CATEGORY_INCOME[key]}</li>`)
           .join('')}
       </ul>
     `
