@@ -3,7 +3,6 @@ import { Component } from '../../core/component.js'
 import { getState, subscribe } from '../../core/observer.js'
 import {
   selectedCategoryState,
-  selectedCategoryState,
   selectedCategoryTransactionListState,
 } from '../../stores/chartStore.js'
 import './chartPage.scss'
