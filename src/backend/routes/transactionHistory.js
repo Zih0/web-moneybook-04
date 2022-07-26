@@ -1,8 +1,13 @@
 import express from 'express'
-import { getTransactionHistory } from '../controllers/transactionHistory.js'
+import {
+  getCategoryExpenseDetailTransactionList,
+  getTransactionHistory,
+} from '../controllers/transactionHistory.js'
 
 const transactionRouter = express.Router()
 
 transactionRouter.get('/', getTransactionHistory)
+
+transactionRouter.get('/category/detail', getCategoryExpenseDetailTransactionList)
 
 export { transactionRouter }
