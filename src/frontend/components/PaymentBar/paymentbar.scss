@@ -119,11 +119,11 @@
   position: relative;
 }
 
-.category-select {
+.select-dropdown {
   @include user-select-none;
   @include body-regular-text;
 
   white-space: nowrap;
-
   cursor: pointer;
+  line-height: 26px;
 }
