@@ -4,6 +4,7 @@ import './paymentbar.scss'
 import minus from '../../assets/minus.svg'
 import plus from '../../assets/plus.svg'
 import CategoryDropdown from '../CategoryDropdown/CategoryDropdown.js'
+import PaymentDropdown from '../PaymentDropdown/PaymentDropdown.js'
 
 export default class PaymentBar extends Component {
   initState() {
@@ -30,8 +31,8 @@ export default class PaymentBar extends Component {
             <div class='form-element category-form'>
                 <span class='form-element-title'>분류</span>
             
-                <div class="form-element-dropdown category">
-                    <div class="category-select">${
+                <div class="form-element-dropdown">
+                    <div class="select-dropdown" id='category-select';>${
                       category ? CATEGORY[category] : '선택하세요'
                     }</div>
                     <div class="category-dropdown-category"></div>
@@ -45,8 +46,10 @@ export default class PaymentBar extends Component {
             <div class='form-element'>
                 <span class='form-element-title'>결제수단</span>
     
-                 <div class="form-element-dropdown payment">
-                    <div class="category-select">${payment ? CATEGORY[payment] : '선택하세요'}</div>
+                 <div class="form-element-dropdown">
+                    <div class='select-dropdown' id='payment-select'>${
+                      payment ? payment : '선택하세요'
+                    }</div>
                     <div class="category-dropdown-payment"></div>
                 </div>
             </div>
@@ -67,8 +70,10 @@ export default class PaymentBar extends Component {
   }
 
   setEvent() {
-    const $categorySelect = this.querySelector('.category-select')
-    $categorySelect.addEventListener('click', this.handleClickCategorySelect.bind(this))
+    const $categorySelectList = this.querySelectorAll('.select-dropdown')
+    $categorySelectList.forEach((item) =>
+      item.addEventListener('click', this.handleClickCategorySelect.bind(this)),
+    )
 
     const $formInput = this.querySelectorAll('.form-element-input')
     $formInput.forEach(($input) => $input.addEventListener('change', this.handleInput.bind(this)))
@@ -79,11 +84,19 @@ export default class PaymentBar extends Component {
     $categoryDropdownReplaceElement.appendChild(
       new CategoryDropdown({ setCategoryItem: this.setCategoryItem.bind(this) }),
     )
+
+    const $paymentDropdownReplaceElement = this.querySelector('.category-dropdown-payment')
+    $paymentDropdownReplaceElement.appendChild(
+      new PaymentDropdown({ setPaymentItem: this.setPaymentItem.bind(this) }),
+    )
   }
 
-  handleClickCategorySelect() {
-    const $dropdown = this.querySelector('.dropdown-ul')
-    $dropdown.classList.toggle('active')
+  handleClickCategorySelect(e) {
+    const { id } = e.target
+    if (id) {
+      const $dropdown = this.querySelector(`.${id}`)
+      $dropdown.classList.toggle('active')
+    }
   }
 
   setCategoryItem(selectedItem, option) {
@@ -91,7 +104,12 @@ export default class PaymentBar extends Component {
       category: selectedItem,
       option: option,
     })
-    this.handleClickCategorySelect.bind(this)
+  }
+
+  setPaymentItem(selectedItem) {
+    this.setState({
+      payment: selectedItem,
+    })
   }
 
   handleInput(e) {
