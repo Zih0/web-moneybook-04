@@ -8,6 +8,14 @@ const getTransactionHistory = async (req, res) => {
   res.status(200).send({ data })
 }
 
+const getCategoryExpenseDetailTransactionList = async (req, res) => {
+  const { year, month, category } = req.query
+
+  const data = await TransactionService.getCategoryExpenseTransactionList(year, month, category)
+
+  res.status(200).send({ data })
+}
+
 const getExpenseTransactionHistory = async (req, res) => {
   const { year, month } = req.query
 
@@ -16,4 +24,8 @@ const getExpenseTransactionHistory = async (req, res) => {
   res.status(200).send({ data })
 }
 
-export { getTransactionHistory, getExpenseTransactionHistory }
+export {
+  getTransactionHistory,
+  getExpenseTransactionHistory,
+  getCategoryExpenseDetailTransactionList,
+}

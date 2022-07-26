@@ -3,7 +3,6 @@ import { Component } from '../../core/component.js'
 import { getState, subscribe } from '../../core/observer.js'
 import {
   selectedCategoryState,
-  selectedCategoryState,
   selectedCategoryTransactionListState,
 } from '../../stores/chartStore.js'
 import './chartPage.scss'
@@ -32,17 +31,6 @@ export default class ChartPage extends Component {
   setComponent() {
     const $doughnutChartReplace = this.querySelector('#doughnut-chart-replace')
     $doughnutChartReplace.replaceWith(new DoughnutChart())
-
-    const selectedCategoryState = getState(selectedCategoryState)
-    if (selectedCategoryState) {
-      const $categoryTransactionList = this.querySelector('.category-transaction-list')
-
-      $categoryTransactionList.appendChild()
-    }
-  }
-
-  componentDidMount() {
-    const selectedCategoryState = getState(selectedCategoryState)
   }
 }
 customElements.define('chart-container', ChartPage)
