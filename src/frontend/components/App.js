@@ -59,25 +59,30 @@ export default class App extends Component {
     )
 
     // URL에 따른 페이지 라우팅 처리
-    const exampleObject = {
-      [ROUTE['file-text']]: new MainPage(),
-      [ROUTE.calendar]: new CalendarPage(),
-      [ROUTE.chart]: new ChartPage(),
+    switch (pathname) {
+      case '/':
+        $container.appendChild(new MainPage())
+        break
+      case '/calendar':
+        $container.appendChild(new CalendarPage())
+        break
+      case '/chart':
+        $container.appendChild(new ChartPage())
+        break
+      default:
+        break
     }
-
-    const pageComponent = exampleObject[pathname]
-    $container.appendChild(pageComponent)
   }
 
   async componentDidMount() {
     const { pathname } = location
     const { year, month } = getState(dateState)
 
-    if (pathname === ROUTE['file-text'] || pathname === ROUTE.calendar) {
-      const setTransactionListState = setState(transactionListState)
-      const transactionListData = await getTransactionHistoryList(year, month)
-      setTransactionListState(transactionListData)
-    } else if (pathname === ROUTE.chart) {
+    const setTransactionListState = setState(transactionListState)
+    const transactionListData = await getTransactionHistoryList(year, month)
+    setTransactionListState(transactionListData)
+
+    if (pathname === ROUTE.chart) {
       const setExpenseTransactionListState = setState(expenseTransactionListState)
       const expenseTransactionListData = await getExpenseTransactionHistoryList(year, month)
       setExpenseTransactionListState(expenseTransactionListData)

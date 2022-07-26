@@ -14,3 +14,4 @@ export const sixMonthTrendState = initState({
   key: 'chart/sixMonthTrendState',
   defaultValue: {},
 })
+

@@ -8,7 +8,7 @@ import './dateTransactionList.scss'
 
 export default class DateTransactionList extends Component {
   template() {
-    const { transactionList } = this.props
+    const { transactionList, showTotal } = this.props
 
     const [mm, dd, day] = this.convertDate(transactionList[0].payment_date)
     const [income, expense] = calculateTransaction(transactionList)
@@ -20,9 +20,14 @@ export default class DateTransactionList extends Component {
                     <span class="date-transaction-header-date">${mm}월 ${dd}일<span>
                     <span class="date-transaction-header-day">${day}<span>
                 </div>
-                <p class="date-transaction-header-summary">
+                ${
+                  showTotal
+                    ? `<p class="date-transaction-header-summary">
                 ${income ? `수입 ${priceToString(income)}` : ''}
-                ${expense ? `지출 ${priceToString(expense)}` : ''}</p>
+                ${expense ? `지출 ${priceToString(expense)}` : ''}
+                </p>`
+                    : ''
+                }
             </div>
             <div class="date-transaction-list">
             </div>

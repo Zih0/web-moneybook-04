@@ -20,4 +20,8 @@ const getCategorySixMonthTrend = async (year, month, category) => {
   return data ?? {}
 }
 
-export { getTransactionHistoryList, getExpenseTransactionHistoryList, getCategorySixMonthTrend }
+const createTransactionAPI = async (body) => {
+  const { data } = await fetcher.post('/transaction', body)
+}
+
+export { getTransactionHistoryList, getExpenseTransactionHistoryList, getCategorySixMonthTrend, createTransactionAPI }
