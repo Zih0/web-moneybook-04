@@ -3,7 +3,7 @@ import { CATEGORY } from '../../utils/constants.js'
 import './paymentbar.scss'
 import minus from '../../assets/minus.svg'
 import plus from '../../assets/plus.svg'
-import Dropdown from '../Dropdown/Dropdown.js'
+import CategoryDropdown from '../CategoryDropdown/CategoryDropdown.js'
 
 export default class PaymentBar extends Component {
   initState() {
@@ -34,7 +34,7 @@ export default class PaymentBar extends Component {
                     <div class="category-select">${
                       category ? CATEGORY[category] : '선택하세요'
                     }</div>
-                    <div class="category-dropdown-replace"></div>
+                    <div class="category-dropdown-category"></div>
                 </div>
 
             </div>
@@ -44,9 +44,11 @@ export default class PaymentBar extends Component {
             </div>
             <div class='form-element'>
                 <span class='form-element-title'>결제수단</span>
-                    <select class="form-element-dropdown category">
-                    <option selected disabled>선택하세요</option>
-                </select>
+    
+                 <div class="form-element-dropdown payment">
+                    <div class="category-select">${payment ? CATEGORY[payment] : '선택하세요'}</div>
+                    <div class="category-dropdown-payment"></div>
+                </div>
             </div>
             <div class='form-element'>
                 <span class='folement-title'>금액</span> 
@@ -73,14 +75,14 @@ export default class PaymentBar extends Component {
   }
 
   setComponent() {
-    const $categoryDropdownReplaceElement = this.querySelector('.category-dropdown-replace')
+    const $categoryDropdownReplaceElement = this.querySelector('.category-dropdown-category')
     $categoryDropdownReplaceElement.appendChild(
-      new Dropdown({ setCategoryItem: this.setCategoryItem.bind(this) }),
+      new CategoryDropdown({ setCategoryItem: this.setCategoryItem.bind(this) }),
     )
   }
 
   handleClickCategorySelect() {
-    const $dropdown = this.querySelector('.category .dropdown-ul')
+    const $dropdown = this.querySelector('.dropdown-ul')
     $dropdown.classList.toggle('active')
   }
 

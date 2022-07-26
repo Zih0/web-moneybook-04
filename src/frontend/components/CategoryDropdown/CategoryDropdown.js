@@ -1,8 +1,8 @@
 import { Component } from '../../core/component.js'
 import { INCOME, EXPENSE } from '../../utils/constants.js'
-import './dropdown.scss'
+import './categorydropdown.scss'
 
-export default class Dropdown extends Component {
+export default class CategoryDropdown extends Component {
   constructor(props) {
     super(props)
   }
@@ -35,4 +35,4 @@ export default class Dropdown extends Component {
   }
 }
 
-customElements.define('custom-dropdown', Dropdown)
+customElements.define('category-dropdown', CategoryDropdown)
