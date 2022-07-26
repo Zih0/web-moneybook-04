@@ -110,6 +110,19 @@ const TransactionService = {
 
     return sixMonthData
   },
+
+  createTransaction: async (data) => {
+    const { paymentDate, category, title, payment_id, price } = data
+    const response = await TransactionHistory.create({
+      payment_date: paymentDate,
+      category,
+      title,
+      payment_id,
+      price,
+    })
+
+    return response
+  },
 }
 
 export { TransactionService }

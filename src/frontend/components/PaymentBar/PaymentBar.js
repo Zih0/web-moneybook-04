@@ -9,24 +9,24 @@ import PaymentDropdown from '../PaymentDropdown/PaymentDropdown.js'
 export default class PaymentBar extends Component {
   initState() {
     this.state = {
-      date: '',
+      paymentDate: '',
       category: '',
       title: '',
-      payment: '',
-      price: '',
+      payment_id: 0,
+      price: 0,
       option: false,
     }
   }
 
   template() {
-    const { date, category, title, payment, price, option } = this.state
+    const { paymentDate, category, title, payment_id, price, option } = this.state
 
     return /*html*/ `
     <div class='paymentbar-container'>
         <form class='form-wrapper'>
             <div class='form-element'>
                 <span class='form-element-title'>일자</span>
-                <input class='form-element-input' id='date' placeholder='yyyymmdd' value=${date}>
+                <input class='form-element-input' id='paymentDate' placeholder='yyyymmdd' value=${paymentDate}>
             </div>
             <div class='form-element category-form'>
                 <span class='form-element-title'>분류</span>
@@ -48,7 +48,7 @@ export default class PaymentBar extends Component {
     
                  <div class="form-element-dropdown">
                     <div class='select-dropdown' id='payment-select'>${
-                      payment ? payment : '선택하세요'
+                      payment_id ? payment_id : '선택하세요'
                     }</div>
                     <div class="category-dropdown-payment"></div>
                 </div>
@@ -108,7 +108,7 @@ export default class PaymentBar extends Component {
 
   setPaymentItem(selectedItem) {
     this.setState({
-      payment: selectedItem,
+      payment_id: 2,
     })
   }
 
