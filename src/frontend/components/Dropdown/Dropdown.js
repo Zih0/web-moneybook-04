@@ -3,6 +3,10 @@ import { INCOME, EXPENSE } from '../../utils/constants.js'
 import './dropdown.scss'
 
 export default class Dropdown extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   template() {
     return /*html*/ `
       <ul class="dropdown-ul">
@@ -16,6 +20,17 @@ export default class Dropdown extends Component {
           .join('')}
       </ul>
     `
+  }
+
+  setEvent() {
+    const $categoryItem = this.querySelector('.dropdown-ul')
+    $categoryItem.addEventListener('click', this.handleClickCategoryItem.bind(this))
+  }
+
+  handleClickCategoryItem(e) {
+    const $item = e.target.closest('.dropdown-li')
+    const selectedItem = $item.innerText
+    this.props.setCategoryItem(selectedItem)
   }
 }
 
