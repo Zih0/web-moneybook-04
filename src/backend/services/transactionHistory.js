@@ -101,7 +101,7 @@ const TransactionService = {
     )
 
     const sixMonthData = getSixMonthObject(year, month)
-    console.log(sixMonthData)
+
     sixMonthExpenseData.forEach((data) => {
       const { year, month, price } = data
       sixMonthData[`${year}-${fillZero(month)}`] = price
