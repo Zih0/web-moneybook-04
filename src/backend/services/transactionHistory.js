@@ -1,6 +1,7 @@
 import { Op } from 'zihorm'
 import zihorm from '../config/db.js'
 import TransactionHistory from '../models/transactionHistory.js'
+import { getBeforeSixMonthDate, fillZero, getSixMonthObject } from '../utils/dateUtil.js'
 
 const TransactionService = {
   // 메인, 달력 페이지를 위한 get 요청, 수입,지출 거래 내역
@@ -80,6 +81,34 @@ const TransactionService = {
     })
 
     return response
+  },
+
+  // 라인차트를 위한 get 요청, 최근 6개월 데이터
+  getSixMonthCategoryExpenseTransactionList: async (year, month, category) => {
+    const [startYear, startMonth] = getBeforeSixMonthDate(year, month)
+
+    const endDate = new Date(year, month, 0).getDate()
+
+    const [sixMonthExpenseData] = await zihorm.query(
+      `SELECT YEAR(payment_date) as year, MONTH(payment_date) as month, ABS(SUM(price)) as price
+       FROM transaction_history 
+       WHERE category="${category}" AND 
+       payment_date BETWEEN "${startYear}-${fillZero(
+        startMonth,
+      )}-01" AND "${year}-${month}-${endDate}" 
+       GROUP BY YEAR(payment_date) ,MONTH(payment_date)
+       ORDER BY YEAR(payment_date) ,MONTH(payment_date) 
+      `,
+    )
+
+    const sixMonthData = getSixMonthObject(year, month)
+
+    sixMonthExpenseData.forEach((data) => {
+      const { year, month, price } = data
+      sixMonthData[`${year}-${fillZero(month)}`] = price
+    })
+
+    return sixMonthData
   },
 }
 
