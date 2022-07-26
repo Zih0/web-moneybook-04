@@ -1,0 +1,63 @@
+@import '../../styles/color.scss';
+@import '../../styles/text-style.scss';
+
+.dropdown-ul {
+  overflow: hidden;
+
+  position: absolute;
+  top: 48px;
+  left: -24px;
+
+  width: 122px;
+
+  display: none;
+
+  background-color: $color-off-white;
+
+  border: 1px solid $color-line;
+  border-radius: 10px;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 4px 20px rgba(0, 0, 0, 0.1);
+
+  white-space: nowrap;
+
+  &.active {
+    display: block;
+  }
+}
+
+.dropdown-title {
+  @include bold-small-text;
+
+  padding: 2px 4px;
+
+  border-bottom: 1px solid $color-line;
+
+  &.expense {
+    color: $color-error;
+  }
+
+  &.income {
+    color: $color-primary-300;
+  }
+}
+
+.dropdown-li {
+  @include body-regular-text;
+
+  padding: 16px 24px;
+
+  color: $color-title-active;
+
+  border-bottom: 1px solid $color-line;
+
+  transition: 0.2s background-color ease;
+
+  &:last-child {
+    border: none;
+  }
+
+  &:hover {
+    background-color: $color-background;
+  }
+}

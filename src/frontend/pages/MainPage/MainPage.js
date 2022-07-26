@@ -1,5 +1,6 @@
 import { Component } from '../../core/component.js'
 import TransactionList from '../../components/TransactionList/TransactionList.js'
+import PaymentBar from '../../components/PaymentBar/PaymentBar.js'
 import './mainPage.scss'
 
 export default class MainPage extends Component {
@@ -14,7 +15,8 @@ export default class MainPage extends Component {
   setComponent() {
     const $trnasactionList = this.querySelector('.transaction-list-wrapper')
 
-    $trnasactionList.replaceWith(new TransactionList())
+    $trnasactionList.appendChild(new PaymentBar())
+    $trnasactionList.appendChild(new TransactionList())
   }
 }
 
