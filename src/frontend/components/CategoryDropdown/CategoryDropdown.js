@@ -9,7 +9,7 @@ export default class CategoryDropdown extends Component {
 
   template() {
     return /*html*/ `
-      <ul class="dropdown-ul">
+      <ul class="dropdown-ul" id="category-ul">
         <div class="dropdown-title expense">지출</div>
         ${Object.keys(EXPENSE)
           .map((key) => ` <li class="dropdown-li false" id=${key}>${EXPENSE[key]}</li>`)
