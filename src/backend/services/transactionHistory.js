@@ -33,6 +33,7 @@ const TransactionService = {
 
     return response
   },
+
   // 도넛차트를 위한 get 요청, 매달 카테고리별 지출 내역
   getExpenseTransactionList: async (year, month) => {
     const response = await TransactionHistory.findAll({
