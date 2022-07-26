@@ -12,11 +12,12 @@ export default class PaymentBar extends Component {
       title: '',
       payment: '',
       price: '',
+      option: false,
     }
   }
 
   template() {
-    const { date, category, title, payment, price } = this.state
+    const { date, category, title, payment, price, option } = this.state
 
     return /*html*/ `
     <div class='paymentbar-container'>
@@ -45,9 +46,9 @@ export default class PaymentBar extends Component {
                 </select>
             </div>
             <div class='form-element'>
-                <span class='form-element-title'>금액</span> 
+                <span class='folement-title'>금액</span> 
                 <div class='price-input-wrapper'>
-                        ${minus}
+                        ${option ? plus : minus}
                         <input class='form-element-input' id='price' placeholder='입력하세요' value=${price}>
                         <span>원</span>
                     </div>
@@ -80,9 +81,10 @@ export default class PaymentBar extends Component {
     $dropdown.classList.toggle('active')
   }
 
-  setCategoryItem(selectedItem) {
+  setCategoryItem(selectedItem, option) {
     this.setState({
       category: selectedItem,
+      option: option,
     })
     this.handleClickCategorySelect.bind(this)
   }

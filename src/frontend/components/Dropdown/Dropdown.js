@@ -12,11 +12,11 @@ export default class Dropdown extends Component {
       <ul class="dropdown-ul">
         <div class="dropdown-title expense">지출</div>
         ${Object.keys(EXPENSE)
-          .map((key) => ` <li class="dropdown-li" id=${key}>${EXPENSE[key]}</li>`)
+          .map((key) => ` <li class="dropdown-li false" id=${key}>${EXPENSE[key]}</li>`)
           .join('')}
         <div class="dropdown-title income">수입</div>
         ${Object.keys(INCOME)
-          .map((key) => ` <li class="dropdown-li" id=${key}>${INCOME[key]}</li>`)
+          .map((key) => ` <li class="dropdown-li true" id=${key}>${INCOME[key]}</li>`)
           .join('')}
       </ul>
     `
@@ -30,7 +30,8 @@ export default class Dropdown extends Component {
   handleClickCategoryItem(e) {
     const $item = e.target.closest('.dropdown-li')
     const selectedItem = $item.innerText
-    this.props.setCategoryItem(selectedItem)
+    const option = e.target.classList.contains('true')
+    this.props.setCategoryItem(selectedItem, option)
   }
 }
 
