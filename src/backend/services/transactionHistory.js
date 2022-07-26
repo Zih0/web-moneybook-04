@@ -1,5 +1,7 @@
 import { Op } from 'zihorm'
+import zihorm from '../config/db.js'
 import TransactionHistory from '../models/transactionHistory.js'
+import { getBeforeSixMonthDate, fillZero, getSixMonthObject } from '../utils/dateUtil.js'
 
 const TransactionService = {
   // 메인, 달력 페이지를 위한 get 요청, 수입,지출 거래 내역
@@ -47,6 +49,65 @@ const TransactionService = {
     })
 
     return response
+  },
+
+  // 카테고리별 상세 지출 내역 가져오기 위한 get 요청
+  getCategoryExpenseTransactionList: async (year, month, category) => {
+    const response = await TransactionHistory.findAll({
+      attributes: [
+        'transaction_history.id',
+        'payment_date',
+        'category',
+        'title',
+        'price',
+        'name as payment',
+        'is_deleted',
+      ],
+      include: { fk: 'payment_id', joinPk: 'id', model: 'payment' },
+      where: {
+        'YEAR(payment_date)': year,
+        'MONTH(payment_date)': month,
+        category,
+      },
+    })
+
+    // 삭제된 결제수단이면 공백처리
+    response.forEach((transactionData) => {
+      if (!transactionData.is_deleted) return
+
+      transactionData.payment = ''
+      delete transactionData.is_deleted
+    })
+
+    return response
+  },
+
+  // 라인차트를 위한 get 요청, 6개월 데이터
+  getSixMonthCategoryExpenseTransactionList: async (year, month, category) => {
+    const [startYear, startMonth] = getBeforeSixMonthDate(year, month)
+
+    const endDate = new Date(year, month, 0).getDate()
+
+    const [sixMonthExpenseData] = await zihorm.query(
+      `SELECT YEAR(payment_date) as year, MONTH(payment_date) as month, ABS(SUM(price)) as price
+       FROM transaction_history 
+       WHERE category="${category}" AND 
+       payment_date BETWEEN "${startYear}-${fillZero(
+        startMonth,
+      )}-01" AND "${year}-${month}-${endDate}" 
+       GROUP BY YEAR(payment_date) ,MONTH(payment_date)
+       ORDER BY YEAR(payment_date) ,MONTH(payment_date) 
+      `,
+    )
+
+    const sixMonthData = getSixMonthObject(year, month)
+    console.log(sixMonthData)
+    sixMonthExpenseData.forEach((data) => {
+      const { year, month, price } = data
+      sixMonthData[`${year}-${fillZero(month)}`] = price
+    })
+
+    return sixMonthData
   },
 }
 
