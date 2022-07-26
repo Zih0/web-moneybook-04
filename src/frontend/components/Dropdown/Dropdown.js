@@ -29,7 +29,7 @@ export default class Dropdown extends Component {
 
   handleClickCategoryItem(e) {
     const $item = e.target.closest('.dropdown-li')
-    const selectedItem = $item.innerText
+    const selectedItem = $item.id
     const option = e.target.classList.contains('true')
     this.props.setCategoryItem(selectedItem, option)
   }

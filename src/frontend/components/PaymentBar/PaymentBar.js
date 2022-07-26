@@ -1,4 +1,5 @@
 import { Component } from '../../core/component.js'
+import { CATEGORY } from '../../utils/constants.js'
 import './paymentbar.scss'
 import minus from '../../assets/minus.svg'
 import plus from '../../assets/plus.svg'
@@ -30,7 +31,9 @@ export default class PaymentBar extends Component {
                 <span class='form-element-title'>분류</span>
             
                 <div class="form-element-dropdown category">
-                    <div class="category-select">${category || '선택하세요'}</div>
+                    <div class="category-select">${
+                      category ? CATEGORY[category] : '선택하세요'
+                    }</div>
                     <div class="category-dropdown-replace"></div>
                 </div>
 
