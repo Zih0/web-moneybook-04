@@ -60,18 +60,6 @@ export default class PaymentBar extends Component {
     `
   }
 
-  handleClickCategorySelect() {
-    const $dropdown = this.querySelector('.category .dropdown-ul')
-    $dropdown.classList.toggle('active')
-  }
-
-  handleClickCategoryItem(e) {
-    this.setState({
-      category: e.target.innerText,
-    })
-    this.handleClickCategorySelect.bind(this)
-  }
-
   setEvent() {
     const $categorySelect = this.querySelector('.category-select')
     $categorySelect.addEventListener('click', this.handleClickCategorySelect.bind(this))
@@ -84,6 +72,18 @@ export default class PaymentBar extends Component {
     const $categoryDropdownReplaceElement = this.querySelector('.category-dropdown-replace')
 
     $categoryDropdownReplaceElement.replaceWith(new Dropdown())
+  }
+
+  handleClickCategorySelect() {
+    const $dropdown = this.querySelector('.category .dropdown-ul')
+    $dropdown.classList.toggle('active')
+  }
+
+  handleClickCategoryItem(e) {
+    this.setState({
+      category: e.target.innerText,
+    })
+    this.handleClickCategorySelect.bind(this)
   }
 }
 
