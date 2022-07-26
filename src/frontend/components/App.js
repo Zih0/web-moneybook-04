@@ -2,11 +2,25 @@ import { Component } from '../core/component.js'
 import Header from './Header/Header.js'
 import { ROUTE } from '../utils/constants.js'
 import MainPage from '../pages/MainPage/MainPage.js'
-import CalendarPage from '../pages/CalendarPage.js'
-import ChartPage from '../pages/ChartPage.js'
+import CalendarPage from '../pages/CalendarPage/CalendarPage.js'
+import ChartPage from '../pages/ChartPage/ChartPage.js'
 import ErrorPage from '../pages/ErrorPage.js'
+import { transactionListState } from '../stores/transactionStore.js'
+import { dateState } from '../stores/dateStore.js'
+import {
+  getTransactionHistoryList,
+  getExpenseTransactionHistoryList,
+} from '../api/transactionHistory.js'
+import { getState, setState, subscribe } from '../core/observer.js'
+import { expenseTransactionListState } from '../stores/chartStore.js'
 
 export default class App extends Component {
+  constructor() {
+    super()
+
+    subscribe(dateState, this.render.bind(this))
+  }
+
   route() {
     this.render()
   }
@@ -53,6 +67,21 @@ export default class App extends Component {
 
     const pageComponent = exampleObject[pathname]
     $container.appendChild(pageComponent)
+  }
+
+  async componentDidMount() {
+    const { pathname } = location
+    const { year, month } = getState(dateState)
+
+    if (pathname === ROUTE['file-text'] || pathname === ROUTE.calendar) {
+      const setTransactionListState = setState(transactionListState)
+      const transactionListData = await getTransactionHistoryList(year, month)
+      setTransactionListState(transactionListData)
+    } else if (pathname === ROUTE.chart) {
+      const setExpenseTransactionListState = setState(expenseTransactionListState)
+      const expenseTransactionListData = await getExpenseTransactionHistoryList(year, month)
+      setExpenseTransactionListState(expenseTransactionListData)
+    }
   }
 }
 

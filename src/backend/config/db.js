@@ -1,12 +1,13 @@
-import mysql from 'mysql2/promise'
+import { Zihorm } from 'zihorm'
+
 import dotenv from 'dotenv'
 dotenv.config()
 
-const dbPool = mysql.createPool({
-  host: process.env.MYSQL_HOST,
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PW,
-  database: process.env.MYSQL_DB,
-})
+const zihorm = new Zihorm(
+  process.env.MYSQL_HOST,
+  process.env.MYSQL_DB,
+  process.env.MYSQL_USER,
+  process.env.MYSQL_PW,
+)
 
-export default dbPool
+export default zihorm

@@ -1,11 +1,10 @@
 import { Component } from '../../core/component.js'
-import { calculateTransaction } from '../../utils/priceUtil.js'
+import { KR_WEEK } from '../../utils/constants.js'
+import { calculateTransaction } from '../../utils/transactionUtil.js'
 import { priceToString } from '../../utils/stringUtil.js'
 import TransactionItem from '../TransactionItem/TransactionItem.js'
 
 import './dateTransactionList.scss'
-
-const KR_WEEK = ['일', '월', '화', '수', '목', '금', '토']
 
 export default class DateTransactionList extends Component {
   template() {

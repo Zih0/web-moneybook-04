@@ -13,9 +13,12 @@ export class Component extends HTMLElement {
     this.innerHTML = this.template()
     this.setComponent()
     this.setEvent()
+    this.componentDidMount()
   }
 
   setEvent() {}
+
+  componentDidMount() {}
 
   setState(newState) {
     this.state = { ...this.state, ...newState }

@@ -19,10 +19,12 @@ const CATEGORY = {
   ...CATEGORY_EXPENSE,
 }
 
+const KR_WEEK = ['일', '월', '화', '수', '목', '금', '토']
+
 const ROUTE = {
   'file-text': '/',
   calendar: '/calendar',
   chart: '/chart',
 }
 
-export { CATEGORY, ROUTE, CATEGORY_INCOME, CATEGORY_EXPENSE }
+export { CATEGORY, ROUTE, CATEGORY_INCOME, CATEGORY_EXPENSE, KR_WEEK }

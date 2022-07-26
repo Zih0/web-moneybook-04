@@ -1,5 +1,5 @@
 const priceToString = (price) => {
-  return price.toLocaleString()
+  return Number(price).toLocaleString()
 }
 
 export { priceToString }
