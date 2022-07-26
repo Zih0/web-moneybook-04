@@ -12,14 +12,14 @@ export default class PaymentBar extends Component {
       paymentDate: '',
       category: '',
       title: '',
-      payment: '',
-      price: '',
+      payment_id: 0,
+      price: 0,
       option: false,
     }
   }
 
   template() {
-    const { paymentDate, category, title, payment, price, option } = this.state
+    const { paymentDate, category, title, payment_id, price, option } = this.state
 
     return /*html*/ `
     <div class='paymentbar-container'>
@@ -48,7 +48,7 @@ export default class PaymentBar extends Component {
     
                  <div class="form-element-dropdown">
                     <div class='select-dropdown' id='payment-select'>${
-                      payment ? payment : '선택하세요'
+                      payment_id ? payment_id : '선택하세요'
                     }</div>
                     <div class="category-dropdown-payment"></div>
                 </div>
@@ -108,7 +108,7 @@ export default class PaymentBar extends Component {
 
   setPaymentItem(selectedItem) {
     this.setState({
-      payment: selectedItem,
+      payment_id: 2,
     })
   }
 
