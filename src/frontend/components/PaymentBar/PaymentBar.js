@@ -9,7 +9,7 @@ import PaymentDropdown from '../PaymentDropdown/PaymentDropdown.js'
 export default class PaymentBar extends Component {
   initState() {
     this.state = {
-      date: '',
+      paymentDate: '',
       category: '',
       title: '',
       payment: '',
@@ -19,14 +19,14 @@ export default class PaymentBar extends Component {
   }
 
   template() {
-    const { date, category, title, payment, price, option } = this.state
+    const { paymentDate, category, title, payment, price, option } = this.state
 
     return /*html*/ `
     <div class='paymentbar-container'>
         <form class='form-wrapper'>
             <div class='form-element'>
                 <span class='form-element-title'>일자</span>
-                <input class='form-element-input' id='date' placeholder='yyyymmdd' value=${date}>
+                <input class='form-element-input' id='paymentDate' placeholder='yyyymmdd' value=${paymentDate}>
             </div>
             <div class='form-element category-form'>
                 <span class='form-element-title'>분류</span>
