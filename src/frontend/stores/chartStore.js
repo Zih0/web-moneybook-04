@@ -10,7 +10,7 @@ export const selectedCategoryState = initState({
   defaultValue: '',
 })
 
-export const selectedCategoryTransactionListState = initState({
-  key: 'chart/selectedCategoryTransactionListState',
-  defaultValue: [],
+export const sixMonthTrendState = initState({
+  key: 'chart/sixMonthTrendState',
+  defaultValue: {},
 })
