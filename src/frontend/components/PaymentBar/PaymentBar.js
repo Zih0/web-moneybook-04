@@ -8,7 +8,7 @@ export default class PaymentBar extends Component {
   initState() {
     this.state = {
       date: '',
-      category: '선택하세요',
+      category: '',
       title: '',
       payment: '',
       price: '',
@@ -23,20 +23,20 @@ export default class PaymentBar extends Component {
         <form class='form-wrapper'>
             <div class='form-element'>
                 <span class='form-element-title'>일자</span>
-                <input class='form-element-input' placeholder='yyyymmdd' value=${date}>
+                <input class='form-element-input' id='date' placeholder='yyyymmdd' value=${date}>
             </div>
-            <div class='form-element'>
+            <div class='form-element category-form'>
                 <span class='form-element-title'>분류</span>
             
                 <div class="form-element-dropdown category">
-                    <div class="category-select">${category}</div>
+                    <div class="category-select">${category || '선택하세요'}</div>
                     <div class="category-dropdown-replace"></div>
                 </div>
 
             </div>
             <div class='form-element'>
                 <span class='form-element-title'>내용</span>
-                <input class='form-element-input' placeholder='입력하세요' value=${title}>
+                <input class='form-element-input' id='title' placeholder='입력하세요' value=${title}>
             </div>
             <div class='form-element'>
                 <span class='form-element-title'>결제수단</span>
@@ -48,7 +48,7 @@ export default class PaymentBar extends Component {
                 <span class='form-element-title'>금액</span> 
                 <div class='price-input-wrapper'>
                         ${minus}
-                        <input class='form-element-input' placeholder='입력하세요' value=${price}>
+                        <input class='form-element-input' id='price' placeholder='입력하세요' value=${price}>
                         <span>원</span>
                     </div>
                 </div>
@@ -64,14 +64,15 @@ export default class PaymentBar extends Component {
     const $categorySelect = this.querySelector('.category-select')
     $categorySelect.addEventListener('click', this.handleClickCategorySelect.bind(this))
 
-    const $categoryItem = this.querySelector('.dropdown-ul')
-    $categoryItem.addEventListener('click', this.handleClickCategoryItem.bind(this))
+    const $formInput = this.querySelectorAll('.form-element-input')
+    $formInput.forEach(($input) => $input.addEventListener('change', this.handleInput.bind(this)))
   }
 
   setComponent() {
     const $categoryDropdownReplaceElement = this.querySelector('.category-dropdown-replace')
-
-    $categoryDropdownReplaceElement.replaceWith(new Dropdown())
+    $categoryDropdownReplaceElement.appendChild(
+      new Dropdown({ setCategoryItem: this.setCategoryItem.bind(this) }),
+    )
   }
 
   handleClickCategorySelect() {
@@ -79,11 +80,18 @@ export default class PaymentBar extends Component {
     $dropdown.classList.toggle('active')
   }
 
-  handleClickCategoryItem(e) {
+  setCategoryItem(selectedItem) {
     this.setState({
-      category: e.target.innerText,
+      category: selectedItem,
     })
     this.handleClickCategorySelect.bind(this)
+  }
+
+  handleInput(e) {
+    const { id } = e.target
+    this.setState({
+      [id]: e.target.value,
+    })
   }
 }
 
