@@ -82,7 +82,7 @@ const TransactionService = {
     return response
   },
 
-  // 라인차트를 위한 get 요청, 6개월 데이터
+  // 라인차트를 위한 get 요청, 최근 6개월 데이터
   getSixMonthCategoryExpenseTransactionList: async (year, month, category) => {
     const [startYear, startMonth] = getBeforeSixMonthDate(year, month)
 
