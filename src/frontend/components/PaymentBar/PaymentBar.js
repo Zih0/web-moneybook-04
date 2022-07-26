@@ -80,13 +80,13 @@ export default class PaymentBar extends Component {
   }
 
   setComponent() {
-    const $categoryDropdownReplaceElement = this.querySelector('.category-dropdown-category')
-    $categoryDropdownReplaceElement.appendChild(
+    const $categoryDropdownElement = this.querySelector('.category-dropdown-category')
+    $categoryDropdownElement.appendChild(
       new CategoryDropdown({ setCategoryItem: this.setCategoryItem.bind(this) }),
     )
 
-    const $paymentDropdownReplaceElement = this.querySelector('.category-dropdown-payment')
-    $paymentDropdownReplaceElement.appendChild(
+    const $paymentDropdownElement = this.querySelector('.category-dropdown-payment')
+    $paymentDropdownElement.appendChild(
       new PaymentDropdown({ setPaymentItem: this.setPaymentItem.bind(this) }),
     )
   }
