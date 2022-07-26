@@ -1,7 +1,7 @@
 import { Op } from 'zihorm'
 import zihorm from '../config/db.js'
 import TransactionHistory from '../models/transactionHistory.js'
-import { getBeforeSixMonthDate, fillZero, getSixMonthObject } from '../utils/dateUtil.js'
+import { getBeforeSixMonthDate, fillZero, getMonthsObject } from '../utils/dateUtil.js'
 
 const TransactionService = {
   // 메인, 달력 페이지를 위한 get 요청, 수입,지출 거래 내역
@@ -101,14 +101,14 @@ const TransactionService = {
       `,
     )
 
-    const sixMonthData = getSixMonthObject(year, month)
+    const monthsData = getMonthsObject(year, month)
 
     sixMonthExpenseData.forEach((data) => {
       const { year, month, price } = data
-      sixMonthData[`${year}-${fillZero(month)}`] = price
+      monthsData[`${year}-${fillZero(month)}`] = price
     })
 
-    return sixMonthData
+    return monthsData
   },
 }
 
