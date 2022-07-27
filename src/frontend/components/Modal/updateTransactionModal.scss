@@ -1,0 +1,111 @@
+@import '../../styles/color.scss';
+@import '../../styles/text-style.scss';
+@import '../../styles//varibles.scss';
+@import './modal.scss';
+
+.transaction-modal-wrapper {
+  padding: 40px;
+  width: 400px;
+
+  background-color: $color-off-white;
+  border-radius: 10px;
+}
+
+.transaction-modal-button-wrapper {
+  margin-top: 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .transaction-modal-cancel-button {
+    @include body-medium-text;
+    color: $color-label;
+  }
+
+  .transaction-modal-update-button {
+    @include body-medium-text;
+    color: $color-label;
+
+    cursor: default;
+
+    &.active {
+      cursor: pointer;
+      color: $color-primary-300;
+    }
+  }
+}
+
+.transaction-form-input {
+  @include body-medium-text;
+  padding: 10px;
+  width: 100%;
+
+  background-color: $color-background;
+  color: $color-title-active;
+
+  border: 1px solid $color-line;
+  border-radius: 10px;
+
+  &:placeholder {
+    color: $color-placeholder;
+  }
+}
+
+.transaction-form {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  label {
+    @include bold-large-text;
+    color: $color-primary-300;
+  }
+}
+
+.transaction-form-price {
+  position: relative;
+
+  .transaction-form-input {
+    padding-right: 24px;
+    text-align: right;
+  }
+
+  svg {
+    position: absolute;
+    top: 12px;
+    left: 8px;
+
+    width: 24px;
+    height: 24px;
+  }
+
+  span {
+    position: absolute;
+    top: 14px;
+    right: 4px;
+  }
+}
+
+.transaction-form-dropdown {
+  @include body-medium-text;
+  padding: 10px;
+  width: 100%;
+
+  background-color: $color-background;
+  color: $color-title-active;
+
+  border: 1px solid $color-line;
+  border-radius: 10px;
+}
+
+.select-dropdown {
+  @include user-select-none;
+  @include body-regular-text;
+
+  white-space: nowrap;
+  cursor: pointer;
+  line-height: 26px;
+}
