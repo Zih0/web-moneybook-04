@@ -37,10 +37,10 @@ export default class DateTransactionList extends Component {
 
   setComponent() {
     const { transactionList } = this.props
-    const $trnasactionList = this.querySelector(`.date-transaction-list`)
+    const $transactionList = this.querySelector(`.date-transaction-list`)
 
     transactionList.forEach((transactionItem) => {
-      $trnasactionList.appendChild(
+      $transactionList.appendChild(
         new TransactionItem({
           category: transactionItem.category,
           title: transactionItem.title,
