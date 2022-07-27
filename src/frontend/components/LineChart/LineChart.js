@@ -60,6 +60,7 @@ export default class LineChart extends Component {
 
     ctx.strokeStyle = '#f5f5f5'
 
+    // 가로 배경선 그리기
     for (let i = 0; i <= ROWS; i++) {
       ctx.beginPath()
       ctx.moveTo(0, gridHeight * i)
@@ -67,6 +68,7 @@ export default class LineChart extends Component {
       ctx.stroke()
     }
 
+    // 세로 배경선 그리기
     for (let i = 0; i <= COLUMNS; i++) {
       ctx.beginPath()
       ctx.moveTo(gridWidth * i, 0)
@@ -102,6 +104,7 @@ export default class LineChart extends Component {
     ctx.lineWidth = 2
     ctx.font = '700 12px Noto Sans KR'
 
+    // 선 그리기
     ctx.beginPath()
     data.forEach((datum, idx) => {
       const xPoint = gridWidth * idx * 2
@@ -115,13 +118,18 @@ export default class LineChart extends Component {
       ctx.stroke()
     })
 
+    // 가격, 점 그리기
     data.forEach((datum, idx) => {
       ctx.beginPath()
       const xPoint = gridWidth * idx * 2
       const yPoint = COORDINATE_HEIGHT - (datum / maxDataValue) * COORDINATE_HEIGHT
+
       if (idx === data.length - 1) {
-        ctx.strokeStyle = '#2ac1bc'
+        ctx.fillStyle = '#2ac1bc'
+      } else {
+        ctx.fillStyle = '#8d9393'
       }
+
       ctx.fillText(priceToString(datum), xPoint, yPoint - 12)
 
       ctx.fillStyle = '#2ac1bc'
