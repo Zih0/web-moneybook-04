@@ -42,6 +42,8 @@ export default class DateTransactionList extends Component {
     transactionList.forEach((transactionItem) => {
       $transactionList.appendChild(
         new TransactionItem({
+          paymentDate: transactionItem.payment_date,
+          id: transactionItem.id,
           category: transactionItem.category,
           title: transactionItem.title,
           payment: transactionItem.payment,
