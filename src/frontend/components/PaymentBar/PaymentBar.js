@@ -75,18 +75,17 @@ export default class PaymentBar extends Component {
   setEvent() {
     // 각 입력 필드별로 다른 예외 처리를 해야하므로 각각의 이벤트 할당
     const $paymentDate = this.querySelector('#paymentDate')
+    const $title = this.querySelector('#title')
+    const $price = this.querySelector('#price')
+    const $formButton = this.querySelector('.form-button')
+    const $categorySelectList = this.querySelectorAll('.select-dropdown')
+
     $paymentDate.addEventListener('input', this.PaymentDataRegExp.bind(this))
     $paymentDate.addEventListener('change', this.handleInputPaymentDate.bind(this))
-
-    this.querySelector('#title').addEventListener('change', this.handleInputTitle.bind(this))
-
-    const $price = this.querySelector('#price')
-    $price.addEventListener('input', this.PriceRegExp.bind(this))
+    $title.addEventListener('change', this.handleInputTitle.bind(this))
+    $price.addEventListener('input', this.priceRegExp.bind(this))
     $price.addEventListener('change', this.handleInputPrice.bind(this))
-
-    this.querySelector('.form-button').addEventListener('click', this.submitForm.bind(this))
-
-    const $categorySelectList = this.querySelectorAll('.select-dropdown')
+    $formButton.addEventListener('click', this.submitForm.bind(this))
     $categorySelectList.forEach((item) =>
       item.addEventListener('click', this.handleClickCategorySelect.bind(this)),
     )
@@ -144,7 +143,7 @@ export default class PaymentBar extends Component {
   }
 
   // 날짜 입력 값 정규 표현식
-  PaymentDataRegExp(e) {
+  paymentDataRegExp(e) {
     e.target.value = e.target.value
       .replace(/[^0-9]/g, '')
       .replace(/^(\d{0,4})(\d{0,2})(\d{0,2})$/g, '$1-$2-$3')
