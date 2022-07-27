@@ -1,9 +1,11 @@
 import fetcher from '../utils/fetcher.js'
+import { sortTransaction } from '../utils/transactionUtil.js'
 
 const getTransactionHistoryList = async (year, month) => {
   const { data } = await fetcher.get(`/transaction?year=${year}&month=${month}`)
+  const sortData = sortTransaction(data)
 
-  return data ?? []
+  return sortData ?? []
 }
 
 const getExpenseTransactionHistoryList = async (year, month) => {
@@ -24,4 +26,9 @@ const createTransactionAPI = async (body) => {
   const { data } = await fetcher.post('/transaction', body)
 }
 
-export { getTransactionHistoryList, getExpenseTransactionHistoryList, getCategorySixMonthTrend, createTransactionAPI }
+export {
+  getTransactionHistoryList,
+  getExpenseTransactionHistoryList,
+  getCategorySixMonthTrend,
+  createTransactionAPI,
+}

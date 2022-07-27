@@ -27,4 +27,8 @@ const calculateTransaction = (transactionDataList) => {
   return [income, expense]
 }
 
-export { classifyTransactionDataByDate, calculateTransaction }
+const sortTransaction = (data) => {
+  return data.sort((a, b) => new Date(b.payment_date) - new Date(a.payment_date))
+}
+
+export { classifyTransactionDataByDate, calculateTransaction, sortTransaction }
