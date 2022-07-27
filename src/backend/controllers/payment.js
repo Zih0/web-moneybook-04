@@ -19,4 +19,11 @@ const createPayment = async (req, res) => {
   })
 }
 
-export { getPayment, createPayment }
+const deletePayment = async (req, res) => {
+  const { id } = req.params
+  const data = await PaymentService.deletePayment(id)
+
+  res.status(200).send()
+}
+
+export { getPayment, createPayment, deletePayment }
