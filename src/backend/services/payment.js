@@ -18,6 +18,20 @@ const PaymentService = {
 
     return response
   },
+  deletePayment: async (paymentId) => {
+    const response = await Payment.update(
+      {
+        is_deleted: 1,
+      },
+      {
+        where: {
+          id: paymentId,
+        },
+      },
+    )
+
+    return response
+  },
 }
 
 export { PaymentService }
