@@ -5,7 +5,7 @@ import { dateState } from '../../stores/dateStore.js'
 import { KR_WEEK } from '../../utils/constants.js'
 import { calculateTransaction, classifyTransactionDataByDate } from '../../utils/transactionUtil.js'
 import { isToday } from '../../utils/calendar.js'
-import { priceToString } from '../../utils/stringUtil.js'
+import { priceToString, fillZero } from '../../utils/stringUtil.js'
 import { transactionListState } from '../../stores/transactionStore.js'
 import './calendarPage.scss'
 
@@ -65,13 +65,13 @@ export default class CalendarPage extends Component {
               }
 
               const hasPriceData = Object.keys(classifiedData).includes(
-                `${year}-${month > 10 ? month : `0${month}`}-${date}`,
+                `${year}-${fillZero(month)}-${date}`,
               )
 
               let income, expense
               if (hasPriceData) {
                 const [inc, exp] = calculateTransaction(
-                  classifiedData[`${year}-${month > 10 ? month : `0${month}`}-${date}`],
+                  classifiedData[`${year}-${fillZero(month)}-${date}`],
                 )
                 income = inc
                 expense = -exp
