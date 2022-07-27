@@ -1,5 +1,6 @@
 import DateTransactionList from '../../components/DateTransactionList/DateTransactionList.js'
 import DoughnutChart from '../../components/DoughnutChart/DoughnutChart.js'
+import LineChart from '../../components/LineChart/LineChart.js'
 import { Component } from '../../core/component.js'
 import { getState, subscribe } from '../../core/observer.js'
 import { selectedCategoryState } from '../../stores/chartStore.js'
@@ -19,7 +20,7 @@ export default class ChartPage extends Component {
     <div class="chart-page-container">
        <div class="chart-page-wrapper">
         <div id="doughnut-chart-replace"></div>
-
+        <div id="line-chart-replace"></div>
 
         <div class="category-transaction-list">
 
@@ -35,6 +36,9 @@ export default class ChartPage extends Component {
 
     const selectedCategory = getState(selectedCategoryState)
     if (!selectedCategory) return
+
+    const $lineChartReplace = this.querySelector('#line-chart-replace')
+    $lineChartReplace.replaceWith(new LineChart())
 
     const transactionList = getState(transactionListState)
     if (!transactionList) return
@@ -57,4 +61,5 @@ export default class ChartPage extends Component {
     return transactionList.filter((transactionData) => transactionData.category === category)
   }
 }
+
 customElements.define('chart-container', ChartPage)
