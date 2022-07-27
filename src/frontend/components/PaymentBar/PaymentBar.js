@@ -5,28 +5,31 @@ import minus from '../../assets/minus.svg'
 import plus from '../../assets/plus.svg'
 import CategoryDropdown from '../CategoryDropdown/CategoryDropdown.js'
 import PaymentDropdown from '../PaymentDropdown/PaymentDropdown.js'
+import { priceToString, todayDate } from '../../utils/stringUtil.js'
+import { createTransactionAPI } from '../../api/transactionHistory.js'
 
 export default class PaymentBar extends Component {
   initState() {
     this.state = {
-      paymentDate: '',
+      paymentDate: todayDate(),
       category: '',
       title: '',
       payment_id: 0,
       price: 0,
       option: false,
+      disabled: true,
     }
   }
 
   template() {
-    const { paymentDate, category, title, payment_id, price, option } = this.state
+    const { paymentDate, category, title, payment_id, price, option, disabled } = this.state
 
     return /*html*/ `
     <div class='paymentbar-container'>
-        <form class='form-wrapper'>
+        <div class='form-wrapper'>
             <div class='form-element'>
                 <span class='form-element-title'>일자</span>
-                <input class='form-element-input' id='paymentDate' placeholder='yyyymmdd' value=${paymentDate}>
+                <input class='form-element-input' id='paymentDate' placeholder='yyyymmdd' maxlength='10' value=${paymentDate}>
             </div>
             <div class='form-element category-form'>
                 <span class='form-element-title'>분류</span>
@@ -62,33 +65,59 @@ export default class PaymentBar extends Component {
                     </div>
                 </div>
             <button class='form-button'>
-            ${plus}
+              ${plus}
             </button>
-        </form>
+        </div>
     </div>
     `
   }
 
   setEvent() {
+    // 각 입력 필드별로 다른 예외 처리를 해야하므로 각각의 이벤트 할당
+    const $paymentDate = this.querySelector('#paymentDate')
+    const $title = this.querySelector('#title')
+    const $price = this.querySelector('#price')
+    const $formButton = this.querySelector('.form-button')
     const $categorySelectList = this.querySelectorAll('.select-dropdown')
+
+    $paymentDate.addEventListener('input', this.paymentDataRegExp.bind(this))
+    $paymentDate.addEventListener('change', this.handleInputPaymentDate.bind(this))
+    $title.addEventListener('change', this.handleInputTitle.bind(this))
+    $price.addEventListener('input', this.priceRegExp.bind(this))
+    $price.addEventListener('change', this.handleInputPrice.bind(this))
+    $formButton.addEventListener('click', this.submitForm.bind(this))
     $categorySelectList.forEach((item) =>
       item.addEventListener('click', this.handleClickCategorySelect.bind(this)),
     )
-
-    const $formInput = this.querySelectorAll('.form-element-input')
-    $formInput.forEach(($input) => $input.addEventListener('change', this.handleInput.bind(this)))
   }
 
   setComponent() {
     const $categoryDropdownElement = this.querySelector('.category-dropdown-category')
     $categoryDropdownElement.appendChild(
-      new CategoryDropdown({ setCategoryItem: this.setCategoryItem.bind(this) }),
+      new CategoryDropdown({ handleInputCategory: this.handleInputCategory.bind(this) }),
     )
 
     const $paymentDropdownElement = this.querySelector('.category-dropdown-payment')
     $paymentDropdownElement.appendChild(
-      new PaymentDropdown({ setPaymentItem: this.setPaymentItem.bind(this) }),
+      new PaymentDropdown({ handleInputPaymentId: this.handleInputPaymentId.bind(this) }),
     )
+  }
+
+  submitForm(e) {
+    const result = e.target.closest('.submit')
+    if (!result) return
+
+    const { paymentDate, category, title, payment_id, price, option } = this.state
+    let tmpPrice = Number(price.replace(/,/g, ''))
+    tmpPrice = option ? tmpPrice : -tmpPrice
+    const data = {
+      paymentDate,
+      category,
+      title,
+      payment_id,
+      price: tmpPrice,
+    }
+    createTransactionAPI(data)
   }
 
   handleClickCategorySelect(e) {
@@ -99,24 +128,75 @@ export default class PaymentBar extends Component {
     }
   }
 
-  setCategoryItem(selectedItem, option) {
+  checkFormButton() {
+    const check = Object.values(this.state).every((state) => state !== '' && state !== 0)
+
+    this.setState({
+      disabled: !check,
+    })
+
+    if (check) {
+      this.querySelector('.form-button').classList.add('submit')
+    } else {
+      this.querySelector('.form-button').classList.remove('submit')
+    }
+  }
+
+  // 날짜 입력 값 정규 표현식
+  paymentDataRegExp(e) {
+    e.target.value = e.target.value
+      .replace(/[^0-9]/g, '')
+      .replace(/^(\d{0,4})(\d{0,2})(\d{0,2})$/g, '$1-$2-$3')
+      .replace(/\-{1,2}$/g, '')
+      .replace()
+  }
+
+  // 가격 입력 정규 표현식
+  priceRegExp(e) {
+    e.target.value = priceToString(e.target.value.replace(/[^0-9]/g, ''))
+  }
+
+  /* 필드 입력 관련 함수 */
+
+  // 날짜 입력 폼
+  handleInputPaymentDate(e) {
+    this.setState({
+      paymentDate: e.target.value,
+    })
+    this.checkFormButton()
+  }
+
+  // 카테고리 입력 폼
+  handleInputCategory(selectedItem, option) {
     this.setState({
       category: selectedItem,
       option: option,
     })
+    this.checkFormButton()
   }
 
-  setPaymentItem(selectedItem) {
+  // 내용 입력 폼
+  handleInputTitle(e) {
+    this.setState({
+      title: e.target.value,
+    })
+    this.checkFormButton()
+  }
+
+  // 결제수단 입력 폼
+  handleInputPaymentId(selectedItem) {
     this.setState({
       payment_id: 2,
     })
+    this.checkFormButton()
   }
 
-  handleInput(e) {
-    const { id } = e.target
+  // 가격 입력 폼
+  handleInputPrice(e) {
     this.setState({
-      [id]: e.target.value,
+      price: e.target.value,
     })
+    this.checkFormButton()
   }
 }
 

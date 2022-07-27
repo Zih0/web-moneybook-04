@@ -81,6 +81,7 @@
   @include body-regular-text;
   width: 100%;
   border: none;
+  background-color: $color-off-white;
 
   &::placeholder {
     color: $color-label;
@@ -105,12 +106,25 @@
 
   border: 2px solid $color-primary-200;
   border-radius: 10px;
-
+  background-color: $color-off-white;
   svg {
     width: 24px;
-
     path {
       stroke: $color-primary-200;
+    }
+  }
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+
+  &.submit {
+    background-color: $color-primary-200;
+    svg {
+      width: 24px;
+      path {
+        stroke: $color-off-white;
+      }
     }
   }
 }

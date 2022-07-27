@@ -36,7 +36,7 @@ export default class PaymentDropdown extends Component {
   handleClickCategoryItem(e) {
     const $item = e.target.closest('.dropdown-li')
     const paymentItem = $item.id
-    this.props.setPaymentItem(paymentItem)
+    this.props.handleInputPaymentId(paymentItem)
   }
 }
 
