@@ -6,8 +6,13 @@ import { CATEGORY_EXPENSE } from '../../utils/constants.js'
 import { priceToString } from '../../utils/stringUtil.js'
 import './lineChart.scss'
 
-export const COORDINATE_WIDTH = 750
-export const COORDINATE_HEIGHT = 300
+export const CHART_WIDTH = 750
+export const CHART_HEIGHT = 300
+export const X_PADDING = 20
+export const Y_PADDING = 20
+
+export const COORDINATE_WIDTH = CHART_WIDTH + X_PADDING
+export const COORDINATE_HEIGHT = CHART_HEIGHT + Y_PADDING
 export const COLUMNS = 22
 export const ROWS = 10
 
@@ -26,7 +31,7 @@ export default class LineChart extends Component {
     return `
       <div class="line-board">
         <p class="line-chart-title">${category} 카테고리 소비 추이</p>
-        <canvas id="grid-canvas" width="750" height="300"></canvas>
+        <canvas id="grid-canvas" width=${COORDINATE_WIDTH} height=${COORDINATE_HEIGHT}></canvas>
         <div id="months"></div>
       </div>
     `
@@ -55,8 +60,8 @@ export default class LineChart extends Component {
     const $canvas = this.querySelector('#grid-canvas')
     const ctx = $canvas.getContext('2d')
 
-    const gridHeight = COORDINATE_HEIGHT / ROWS
-    const gridWidth = COORDINATE_WIDTH / COLUMNS
+    const gridHeight = CHART_HEIGHT / ROWS
+    const gridWidth = CHART_WIDTH / COLUMNS
 
     ctx.strokeStyle = '#f5f5f5'
 
@@ -64,7 +69,7 @@ export default class LineChart extends Component {
     for (let i = 0; i <= ROWS; i++) {
       ctx.beginPath()
       ctx.moveTo(0, gridHeight * i)
-      ctx.lineTo(COORDINATE_WIDTH, gridHeight * i)
+      ctx.lineTo(CHART_WIDTH, gridHeight * i)
       ctx.stroke()
     }
 
@@ -72,13 +77,13 @@ export default class LineChart extends Component {
     for (let i = 0; i <= COLUMNS; i++) {
       ctx.beginPath()
       ctx.moveTo(gridWidth * i, 0)
-      ctx.lineTo(gridWidth * i, COORDINATE_HEIGHT)
+      ctx.lineTo(gridWidth * i, CHART_HEIGHT)
       ctx.stroke()
     }
 
+    // x축 월 글자 그리기
     ctx.textAlign = 'center'
     ctx.font = '700 12px Noto Sans KR'
-
     for (let i = 0; i <= COLUMNS; i += 2) {
       const xPoint = gridWidth * i
       const monthIndex = Math.floor(i / 2)
@@ -97,7 +102,7 @@ export default class LineChart extends Component {
     const $canvas = this.querySelector('#grid-canvas')
     const ctx = $canvas.getContext('2d')
 
-    const gridWidth = COORDINATE_WIDTH / COLUMNS
+    const gridWidth = CHART_WIDTH / COLUMNS
     const maxDataValue = Math.max(...data) * 1.2
 
     ctx.strokeStyle = '#2ac1bc'
@@ -108,7 +113,7 @@ export default class LineChart extends Component {
     ctx.beginPath()
     data.forEach((datum, idx) => {
       const xPoint = gridWidth * idx * 2
-      const yPoint = COORDINATE_HEIGHT - (datum / maxDataValue) * COORDINATE_HEIGHT
+      const yPoint = CHART_HEIGHT - (datum / maxDataValue) * CHART_HEIGHT
 
       if (!idx) {
         ctx.moveTo(xPoint, yPoint)
@@ -122,7 +127,7 @@ export default class LineChart extends Component {
     data.forEach((datum, idx) => {
       ctx.beginPath()
       const xPoint = gridWidth * idx * 2
-      const yPoint = COORDINATE_HEIGHT - (datum / maxDataValue) * COORDINATE_HEIGHT
+      const yPoint = CHART_HEIGHT - (datum / maxDataValue) * CHART_HEIGHT
 
       if (idx === data.length - 1) {
         ctx.fillStyle = '#2ac1bc'
