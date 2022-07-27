@@ -80,7 +80,7 @@ export default class PaymentBar extends Component {
     const $formButton = this.querySelector('.form-button')
     const $categorySelectList = this.querySelectorAll('.select-dropdown')
 
-    $paymentDate.addEventListener('input', this.PaymentDataRegExp.bind(this))
+    $paymentDate.addEventListener('input', this.paymentDataRegExp.bind(this))
     $paymentDate.addEventListener('change', this.handleInputPaymentDate.bind(this))
     $title.addEventListener('change', this.handleInputTitle.bind(this))
     $price.addEventListener('input', this.priceRegExp.bind(this))
@@ -152,7 +152,7 @@ export default class PaymentBar extends Component {
   }
 
   // 가격 입력 정규 표현식
-  PriceRegExp(e) {
+  priceRegExp(e) {
     e.target.value = priceToString(e.target.value.replace(/[^0-9]/g, ''))
   }
 
