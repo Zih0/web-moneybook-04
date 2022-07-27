@@ -1,4 +1,5 @@
 import { Component } from '../../core/component.js'
+import { getPaymentList } from '../../api/payment.js'
 import './paymentdropdown.scss'
 import removeIcon from '../../assets/removeIcon.svg'
 
@@ -6,11 +7,16 @@ export default class PaymentDropdown extends Component {
   constructor(props) {
     super(props)
   }
-  initState() {
-    // 기능 개발 시, 결제수단 API에서 받아온 데이터로 대체하기
+  async initState() {
     this.state = {
-      payment: ['신한은행', '국민은행', '현금', '비씨카드'],
+      payment: [],
     }
+
+    const data = await getPaymentList()
+
+    this.setState({
+      payment: data,
+    })
   }
 
   template() {
@@ -19,11 +25,12 @@ export default class PaymentDropdown extends Component {
       <ul class="dropdown-ul payment-select">
         ${payment
           .map(
-            (item) => ` <li class="dropdown-li" id=${item}>${item} 
+            ({ id, name }) => ` <li class="dropdown-li" id=${id}>${name} 
           <button>${removeIcon}</button>
           </li>`,
           )
           .join('')}
+          <li class='dropdown-li create-li'>추가하기</li>
       </ul>
     `
   }
@@ -35,8 +42,14 @@ export default class PaymentDropdown extends Component {
 
   handleClickCategoryItem(e) {
     const $item = e.target.closest('.dropdown-li')
-    const paymentItem = $item.id
-    this.props.handleInputPaymentId(paymentItem)
+
+    if ($item.classList.contains('create-li')) {
+      // 모달 호출
+    } else {
+      const payment_id = $item.id
+      const paymentName = $item.innerText
+      this.props.handleInputPaymentId(payment_id, paymentName)
+    }
   }
 }
 
