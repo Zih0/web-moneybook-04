@@ -3,6 +3,7 @@ import { CATEGORY } from '../../utils/constants.js'
 import './paymentbar.scss'
 import minus from '../../assets/minus.svg'
 import plus from '../../assets/plus.svg'
+import rowArrow from '../../assets/row-arrow.svg'
 import CategoryDropdown from '../CategoryDropdown/CategoryDropdown.js'
 import PaymentDropdown from '../PaymentDropdown/PaymentDropdown.js'
 import { priceToString, todayDate } from '../../utils/stringUtil.js'
@@ -35,9 +36,10 @@ export default class PaymentBar extends Component {
                 <span class='form-element-title'>분류</span>
             
                 <div class="form-element-dropdown">
-                    <div class="select-dropdown" id='category-select';>${
-                      category ? CATEGORY[category] : '선택하세요'
-                    }</div>
+                    <div class="select-dropdown" id='category-select'>
+                      ${category ? CATEGORY[category] : '선택하세요'}
+                      ${rowArrow}
+                    </div>
                     <div class="category-dropdown-category"></div>
                 </div>
 
@@ -50,9 +52,10 @@ export default class PaymentBar extends Component {
                 <span class='form-element-title'>결제수단</span>
     
                  <div class="form-element-dropdown">
-                    <div class='select-dropdown' id='payment-select'>${
-                      payment_id ? payment_id : '선택하세요'
-                    }</div>
+                    <div class='select-dropdown' id='payment-select'>
+                      ${payment_id ? payment_id : '선택하세요'}
+                      ${rowArrow}
+                    </div>
                     <div class="category-dropdown-payment"></div>
                 </div>
             </div>
