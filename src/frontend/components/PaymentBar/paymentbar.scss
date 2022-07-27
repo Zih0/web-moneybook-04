@@ -81,6 +81,7 @@
   @include body-regular-text;
   width: 100%;
   border: none;
+  background-color: $color-off-white;
 
   &::placeholder {
     color: $color-label;
