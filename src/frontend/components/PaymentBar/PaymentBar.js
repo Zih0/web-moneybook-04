@@ -15,15 +15,15 @@ export default class PaymentBar extends Component {
       paymentDate: todayDate(),
       category: '',
       title: '',
+      paymentName: '',
       payment_id: 0,
       price: 0,
       option: false,
-      disabled: true,
     }
   }
 
   template() {
-    const { paymentDate, category, title, payment_id, price, option, disabled } = this.state
+    const { paymentDate, category, title, payment_id, paymentName, price, option } = this.state
 
     return /*html*/ `
     <div class='paymentbar-container'>
@@ -53,7 +53,7 @@ export default class PaymentBar extends Component {
     
                  <div class="form-element-dropdown">
                     <div class='select-dropdown' id='payment-select'>
-                      ${payment_id ? payment_id : '선택하세요'}
+                      ${paymentName ? paymentName : '선택하세요'}
                       ${rowArrow}
                     </div>
                     <div class="category-dropdown-payment"></div>
@@ -121,6 +121,16 @@ export default class PaymentBar extends Component {
       price: tmpPrice,
     }
     createTransactionAPI(data)
+
+    this.setState({
+      paymentDate: todayDate(),
+      category: '',
+      title: '',
+      paymentName: '',
+      payment_id: 0,
+      price: 0,
+      option: false,
+    })
   }
 
   handleClickCategorySelect(e) {
@@ -187,9 +197,10 @@ export default class PaymentBar extends Component {
   }
 
   // 결제수단 입력 폼
-  handleInputPaymentId(selectedItem) {
+  handleInputPaymentId(payment_id, paymentName) {
     this.setState({
-      payment_id: 2,
+      payment_id,
+      paymentName,
     })
     this.checkFormButton()
   }
