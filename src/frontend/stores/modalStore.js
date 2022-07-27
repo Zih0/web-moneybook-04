@@ -2,12 +2,12 @@ import { initState } from '../core/observer.js'
 
 export const addPaymentModalOpenState = initState({
   key: 'addPaymentModalOpenState',
-  defaultValue: true,
+  defaultValue: false,
 })
 
 export const removePaymentModalOpenState = initState({
   key: 'removePaymentModalOpenState',
-  defaultValue: true,
+  defaultValue: false,
 })
 
 export const selectedPaymentState = initState({
