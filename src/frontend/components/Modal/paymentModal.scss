@@ -17,7 +17,8 @@
   color: $color-title-active;
 }
 
-.payment-modal-input {
+.payment-modal-input,
+.payment-modal-input-text {
   @include body-medium-text;
   margin-top: 24px;
   padding: 10px;
@@ -34,17 +35,10 @@
   }
 }
 
-.payment-modal-input-text {
-  @include body-medium-text;
-  margin-top: 24px;
-  padding: 10px;
-  width: 100%;
-
-  background-color: $color-off-white;
-  color: $color-title-active;
-
-  border: 1px solid $color-line;
-  border-radius: 10px;
+.payment-modal-input {
+  &:placeholder {
+    color: $color-placeholder;
+  }
 }
 
 .payment-modal-button-wrapper {
