@@ -8,13 +8,9 @@
   width: 100vw;
   height: 100vh;
 
-  display: none;
-
-  &.open {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-background {

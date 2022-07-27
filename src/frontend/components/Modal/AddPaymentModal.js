@@ -1,22 +1,23 @@
 import { Component } from '../../core/component.js'
-import { getState, setState, subscribe } from '../../core/observer.js'
-import { addPaymentModalOpenState } from '../../stores/modalStore.js'
+import { closeModal } from '../../utils/modal.js'
+
 import './paymentModal.scss'
 
 export default class AddPaymentModal extends Component {
   constructor(props) {
     super(props)
-
-    this.setModalOpen = setState(addPaymentModalOpenState)
-    subscribe(addPaymentModalOpenState, this.render.bind(this))
   }
 
   addPayment(payment) {
     console.log('ADD PAYMENT' + payment)
   }
 
+  handleClickBackground() {
+    closeModal(this)
+  }
+
   handleClickCancelButton() {
-    this.setModalOpen(false)
+    closeModal(this)
   }
 
   handleClickSubmitButton() {
@@ -41,20 +42,20 @@ export default class AddPaymentModal extends Component {
   }
 
   setEvent() {
+    const $modalBackground = this.querySelector('.modal-background')
     const $paymentInput = this.querySelector('.payment-modal-input')
     const $cancelButton = this.querySelector('.payment-modal-cancel-button')
     const $submitButton = this.querySelector('.payment-modal-submit-button')
 
+    $modalBackground.addEventListener('click', this.handleClickBackground.bind(this))
     $paymentInput.addEventListener('input', this.handleInputPayment.bind(this))
     $cancelButton.addEventListener('click', this.handleClickCancelButton.bind(this))
     $submitButton.addEventListener('click', this.handleClickSubmitButton.bind(this))
   }
 
   template() {
-    const modalOpen = getState(addPaymentModalOpenState)
-
     return /*html*/ `
-      <div class="modal-wrapper ${modalOpen ? 'open' : ''}">
+      <div class="modal-wrapper">
         <div class="modal-background"></div>
         <div class="modal-content">
           <div class="payment-modal-wrapper">

@@ -1,54 +1,45 @@
 import { Component } from '../../core/component.js'
-import { getState, setState, subscribe } from '../../core/observer.js'
-import { removePaymentModalOpenState, selectedPaymentState } from '../../stores/modalStore.js'
+import { closeModal } from '../../utils/modal.js'
 import './paymentModal.scss'
 
 export default class RemovePaymentModal extends Component {
-  constructor(props) {
-    super(props)
-
-    this.setModalOpen = setState(removePaymentModalOpenState)
-    subscribe(removePaymentModalOpenState, this.render.bind(this))
-    subscribe(selectedPaymentState, this.render.bind(this))
+  removePayment() {
+    console.log('REMOVE PAYMENT')
   }
 
-  removePayment(payment) {
-    console.log('REMOVE PAYMENT' + payment)
+  handleClickBackground() {
+    closeModal(this)
   }
 
   handleClickCancelButton() {
-    this.setModalOpen(false)
+    closeModal(this)
   }
 
   handleClickRemoveButton() {
-    const $paymentInput = this.querySelector('.payment-modal-input')
-    if (!$paymentInput.value) {
-      return
-    }
-
-    this.addPayment($paymentInput.value)
-    this.setModalOpen(false)
+    this.removePayment()
+    closeModal(this)
   }
 
   setEvent() {
+    const $modalBackground = this.querySelector('.modal-background')
     const $cancelButton = this.querySelector('.payment-modal-cancel-button')
     const $removeButton = this.querySelector('.payment-modal-remove-button')
 
+    $modalBackground.addEventListener('click', this.handleClickBackground.bind(this))
     $cancelButton.addEventListener('click', this.handleClickCancelButton.bind(this))
     $removeButton.addEventListener('click', this.handleClickRemoveButton.bind(this))
   }
 
   template() {
-    const modalOpen = getState(removePaymentModalOpenState)
-    const selectedPayment = getState(selectedPaymentState)
+    // const { selectedPayment } = this.props
 
     return /*html*/ `
-      <div class="modal-wrapper ${modalOpen ? 'open' : ''}">
+      <div class="modal-wrapper">
         <div class="modal-background"></div>
         <div class="modal-content">
           <div class="payment-modal-wrapper">
             <p class="payment-modal-title">해당 결제수단을 삭제하시겠습니까?</p>
-            <p class="payment-modal-input-text">${selectedPayment}</p>
+            <p class="payment-modal-input-text">props 자리</p>
 
             <div class="payment-modal-button-wrapper">
               <button class="payment-modal-cancel-button">취소</button>
