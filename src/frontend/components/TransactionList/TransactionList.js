@@ -6,6 +6,7 @@ import DateTransactionList from '../DateTransactionList/DateTransactionList.js'
 import './transactionList.scss'
 import IconCheckboxDefault from '../../assets/checkbox-default.svg'
 import IconCheckboxActive from '../../assets/checkbox-active.svg'
+import { priceToString } from '../../utils/stringUtil.js'
 
 export default class TransactionList extends Component {
   constructor(props) {
@@ -38,12 +39,12 @@ export default class TransactionList extends Component {
                 <input type="checkbox" id="filter-income" ${incomeChecked ? 'checked' : ''} />
                 <label for="filter-income" class="${!incomeChecked ? 'unchecked' : ''}">
                   <i>${incomeChecked ? IconCheckboxActive : IconCheckboxDefault}</i>
-                  수입 ${totalIncome}
+                  수입 ${priceToString(totalIncome)}
                 </label>
                 <input type="checkbox" id="filter-expense" ${expenseChecked ? 'checked' : ''} />
                 <label for="filter-expense"  class="${!expenseChecked ? 'unchecked' : ''}">
                 <i>${expenseChecked ? IconCheckboxActive : IconCheckboxDefault}</i>
-                  지출 ${totalExpense}
+                  지출 ${priceToString(totalExpense)}
                 </label>
               </div>
               </div>

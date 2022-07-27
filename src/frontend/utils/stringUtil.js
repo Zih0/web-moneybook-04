@@ -19,4 +19,8 @@ const todayDate = () => {
   return [year, month, day].join('-')
 }
 
-export { priceToString, todayDate }
+const fillZero = (number) => {
+  return number < 10 ? `0${number}` : number
+}
+
+export { priceToString, fillZero, todayDate }

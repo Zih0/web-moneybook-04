@@ -1,6 +1,12 @@
+import { getCategorySixMonthTrend } from '../../api/transactionHistory.js'
 import { Component } from '../../core/component.js'
 import { getState, setState, subscribe } from '../../core/observer.js'
-import { expenseTransactionListState, selectedCategoryState } from '../../stores/chartStore.js'
+import {
+  expenseTransactionListState,
+  selectedCategoryState,
+  sixMonthTrendState,
+} from '../../stores/chartStore.js'
+import { dateState } from '../../stores/dateStore.js'
 import { CATEGORY } from '../../utils/constants.js'
 import { priceToString } from '../../utils/stringUtil.js'
 import './doughnutChart.scss'
@@ -10,8 +16,16 @@ export default class DoughnutChart extends Component {
     super()
 
     this.setCategory = setState(selectedCategoryState)
+    this.sixMonthTrend = setState(sixMonthTrendState)
     subscribe(expenseTransactionListState, this.render.bind(this))
   }
+
+  initState() {
+    this.state = {
+      prevSelectedCategory: '',
+    }
+  }
+
   template() {
     const expenseTransactionHistoryList = getState(expenseTransactionListState)
     const totalExpense = this.getTotalExpense(expenseTransactionHistoryList)
@@ -59,10 +73,17 @@ export default class DoughnutChart extends Component {
     $doughnutCategoryList.addEventListener('click', this.handleClickExpenseCategory.bind(this))
   }
 
-  handleClickExpenseCategory(e) {
+  async handleClickExpenseCategory(e) {
     const $categoryWrapper = e.target.closest('.price-category-wrapper')
     const { category } = $categoryWrapper.dataset
+    const { prevSelectedCategory } = this.state
 
+    if (prevSelectedCategory === category) return
+
+    const { year, month } = getState(dateState)
+    const sixMonthTrendData = await getCategorySixMonthTrend(year, month, category)
+
+    this.sixMonthTrend(sixMonthTrendData)
     this.setCategory(category)
   }
 
