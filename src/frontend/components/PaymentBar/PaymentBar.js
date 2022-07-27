@@ -5,7 +5,7 @@ import minus from '../../assets/minus.svg'
 import plus from '../../assets/plus.svg'
 import CategoryDropdown from '../CategoryDropdown/CategoryDropdown.js'
 import PaymentDropdown from '../PaymentDropdown/PaymentDropdown.js'
-import { todayDate } from '../../utils/stringUtil.js'
+import { priceToString, todayDate } from '../../utils/stringUtil.js'
 import { createTransactionAPI } from '../../api/transactionHistory.js'
 
 export default class PaymentBar extends Component {
@@ -153,7 +153,7 @@ export default class PaymentBar extends Component {
 
   // 가격 입력 정규 표현식
   PriceRegExp(e) {
-    e.target.value = Number(e.target.value.replace(/[^0-9]/g, '')).toLocaleString()
+    e.target.value = priceToString(e.target.value.replace(/[^0-9]/g, ''))
   }
 
   /* 필드 입력 관련 함수 */
