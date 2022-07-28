@@ -15,7 +15,7 @@ export default class PaymentBar extends Component {
   constructor() {
     super()
 
-    this.setTransaction = setState('transactionListState')
+    this.setTransaction = setState(transactionListState)
   }
 
   initState() {
