@@ -22,6 +22,9 @@ export default class TransactionItem extends Component {
   }
 
   setEvent() {
+    const { isEditable } = this.props
+    if (!isEditable) return
+
     const $transactionItem = this.querySelector('.transaction-item')
 
     $transactionItem.addEventListener('click', this.handleClickItem.bind(this))

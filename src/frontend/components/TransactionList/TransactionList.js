@@ -75,6 +75,8 @@ export default class TransactionList extends Component {
       $transactionList.appendChild(
         new DateTransactionList({
           transactionList,
+          showTotal: true,
+          isEditable: true,
         }),
       )
     })
