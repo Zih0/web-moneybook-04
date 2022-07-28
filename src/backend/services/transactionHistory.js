@@ -124,15 +124,7 @@ const TransactionService = {
     return response
   },
   async updateTransaction(id, data) {
-    const { paymentDate, category, title, payment_id, price } = data
-    const body = {}
-    if (paymentDate) body.paymentDate = paymentDate
-    if (category) body.category = category
-    if (title) body.title = title
-    if (payment_id) body.payment_id = payment_id
-    if (price) body.price = price
-
-    await TransactionHistory.update(body, {
+    await TransactionHistory.update(data, {
       where: {
         id,
       },
