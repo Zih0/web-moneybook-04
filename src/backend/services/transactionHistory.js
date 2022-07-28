@@ -13,6 +13,7 @@ const TransactionService = {
         'category',
         'title',
         'price',
+        'payment_id',
         'name as payment',
         'is_deleted',
       ],
