@@ -8,10 +8,6 @@ export default class AddPaymentModal extends Component {
     super(props)
   }
 
-  addPayment(payment) {
-    console.log('ADD PAYMENT' + payment)
-  }
-
   handleClickBackground() {
     closeModal(this)
   }
@@ -26,8 +22,8 @@ export default class AddPaymentModal extends Component {
       return
     }
 
-    this.addPayment($paymentInput.value)
-    this.setModalOpen(false)
+    this.props.addPayment($paymentInput.value)
+    closeModal(this)
   }
 
   handleInputPayment(e) {
