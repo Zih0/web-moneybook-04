@@ -8,8 +8,16 @@ import CategoryDropdown from '../CategoryDropdown/CategoryDropdown.js'
 import PaymentDropdown from '../PaymentDropdown/PaymentDropdown.js'
 import { priceToString, todayDate } from '../../utils/stringUtil.js'
 import { createTransactionAPI } from '../../api/transactionHistory.js'
+import { getState, setState } from '../../core/observer.js'
+import { transactionListState } from '../../stores/transactionStore.js'
 
 export default class PaymentBar extends Component {
+  constructor() {
+    super()
+
+    this.setTransaction = setState(transactionListState)
+  }
+
   initState() {
     this.state = {
       paymentDate: todayDate(),
@@ -106,21 +114,41 @@ export default class PaymentBar extends Component {
     )
   }
 
-  submitForm(e) {
+  async submitForm(e) {
     const result = e.target.closest('.submit')
     if (!result) return
 
-    const { paymentDate, category, title, payment_id, price, option } = this.state
+    const { paymentDate, category, title, payment_id, paymentName, price, option } = this.state
     let tmpPrice = Number(price.replace(/,/g, ''))
     tmpPrice = option ? tmpPrice : -tmpPrice
-    const data = {
+
+    const submitData = {
       paymentDate,
       category,
       title,
       payment_id,
       price: tmpPrice,
     }
-    createTransactionAPI(data)
+
+    try {
+      const { insertId } = await createTransactionAPI(submitData)
+      const transactionList = getState(transactionListState)
+      const setData = {
+        category,
+        id: insertId,
+        is_deleted: 0,
+        payment: paymentName,
+        payment_date: paymentDate,
+        payment_id: payment_id,
+        price: tmpPrice,
+        title: title,
+      }
+
+      this.setTransaction([...transactionList, setData])
+      debugger
+    } catch (e) {
+      console.error(e)
+    }
 
     this.setState({
       paymentDate: todayDate(),
