@@ -6,10 +6,10 @@ import { CATEGORY_EXPENSE } from '../../utils/constants.js'
 import { priceToString } from '../../utils/stringUtil.js'
 import './lineChart.scss'
 
-export const CHART_WIDTH = 750
-export const CHART_HEIGHT = 300
-export const X_PADDING = 20
-export const Y_PADDING = 20
+export const CHART_WIDTH = 1500
+export const CHART_HEIGHT = 600
+export const X_PADDING = 80
+export const Y_PADDING = 80
 
 export const COORDINATE_WIDTH = CHART_WIDTH + X_PADDING
 export const COORDINATE_HEIGHT = CHART_HEIGHT + Y_PADDING
@@ -31,7 +31,7 @@ export default class LineChart extends Component {
     return `
       <div class="line-board">
         <p class="line-chart-title">${category} 카테고리 소비 추이</p>
-        <canvas id="grid-canvas" width=${COORDINATE_WIDTH} height=${COORDINATE_HEIGHT}></canvas>
+        <canvas id="grid-canvas" class="line-chart" width="1600" height="680"></canvas>
         <div id="months"></div>
       </div>
     `
@@ -68,24 +68,24 @@ export default class LineChart extends Component {
     // 가로 배경선 그리기
     for (let i = 0; i <= ROWS; i++) {
       ctx.beginPath()
-      ctx.moveTo(0, gridHeight * i)
-      ctx.lineTo(CHART_WIDTH, gridHeight * i)
+      ctx.moveTo(X_PADDING, gridHeight * i + Y_PADDING)
+      ctx.lineTo(CHART_WIDTH + X_PADDING, gridHeight * i + Y_PADDING)
       ctx.stroke()
     }
 
     // 세로 배경선 그리기
     for (let i = 0; i <= COLUMNS; i++) {
       ctx.beginPath()
-      ctx.moveTo(gridWidth * i, 0)
-      ctx.lineTo(gridWidth * i, CHART_HEIGHT)
+      ctx.moveTo(gridWidth * i + X_PADDING, Y_PADDING)
+      ctx.lineTo(gridWidth * i + X_PADDING, CHART_HEIGHT + Y_PADDING)
       ctx.stroke()
     }
 
     // x축 월 글자 그리기
     ctx.textAlign = 'center'
-    ctx.font = '700 12px Noto Sans KR'
+    ctx.font = '700 24px Noto Sans KR'
     for (let i = 0; i <= COLUMNS; i += 2) {
-      const xPoint = gridWidth * i
+      const xPoint = gridWidth * i + X_PADDING
       const monthIndex = Math.floor(i / 2)
       const monthText = months[monthIndex]
 
@@ -106,13 +106,13 @@ export default class LineChart extends Component {
     const maxDataValue = Math.max(...data) * 1.2
 
     ctx.strokeStyle = '#2ac1bc'
-    ctx.lineWidth = 2
-    ctx.font = '700 12px Noto Sans KR'
+    ctx.lineWidth = 4
+    ctx.font = '700 24px Noto Sans KR'
 
     // 선 그리기
     ctx.beginPath()
     data.forEach((datum, idx) => {
-      const xPoint = gridWidth * idx * 2
+      const xPoint = gridWidth * idx * 2 + X_PADDING
       const yPoint = CHART_HEIGHT - (datum / maxDataValue) * CHART_HEIGHT
 
       if (!idx) {
@@ -126,7 +126,7 @@ export default class LineChart extends Component {
     // 가격, 점 그리기
     data.forEach((datum, idx) => {
       ctx.beginPath()
-      const xPoint = gridWidth * idx * 2
+      const xPoint = gridWidth * idx * 2 + X_PADDING
       const yPoint = CHART_HEIGHT - (datum / maxDataValue) * CHART_HEIGHT
 
       if (idx === data.length - 1) {
@@ -138,7 +138,7 @@ export default class LineChart extends Component {
       ctx.fillText(priceToString(datum), xPoint, yPoint - 12)
 
       ctx.fillStyle = '#2ac1bc'
-      ctx.arc(xPoint, yPoint, 4, 0, 2 * Math.PI)
+      ctx.arc(xPoint, yPoint, 8, 0, 2 * Math.PI)
       ctx.fill()
     })
   }

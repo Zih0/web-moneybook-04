@@ -3,7 +3,7 @@
 
 .line-board {
   margin-top: 16px;
-  padding: 35px 42px 32px 42px;
+  padding: 32px 0;
 
   width: 848px;
 
@@ -16,5 +16,11 @@
 
 .line-chart-title {
   @include body-large-text;
+  margin-left: 42px;
   margin-bottom: 32px;
+}
+
+.line-chart {
+  width: 800px;
+  height: 340px;
 }
