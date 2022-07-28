@@ -1,0 +1,56 @@
+@import '../../styles/color.scss';
+@import '../../styles/text-style.scss';
+
+.transaction-item {
+  padding: 20px 12px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+
+  transition: background-color 0.3s ease-out;
+
+  background-color: $color-off-white;
+  &:hover {
+    background-color: $color-background;
+  }
+}
+
+.transaction-item-category {
+  @include bold-medium-text;
+
+  width: 92px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 999px;
+  border: none;
+
+  color: $color-off-white;
+}
+
+.transaction-item-title {
+  @include body-medium-text;
+
+  margin-left: 10px;
+
+  flex: 1;
+  color: $color-title-active;
+}
+
+.transaction-item-payment {
+  @include body-medium-text;
+
+  flex: 1;
+  color: $color-body;
+}
+
+.transaction-item-price {
+  @include bold-medium-text;
+
+  color: $color-title-active;
+}

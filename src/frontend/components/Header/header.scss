@@ -1,0 +1,85 @@
+@import '../../styles/color.scss';
+@import '../../styles/typography.scss';
+@import '../../styles/text-style.scss';
+
+header {
+  width: 100%;
+  background-color: $color-primary-200;
+  font-family: $font-display;
+  height: 194px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.header-container {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  max-width: 848px;
+  width: 100%;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+.logo {
+  button {
+    @include body-large-text;
+    font-family: $font-display;
+    color: $color-off-white;
+    width: 100%;
+  }
+}
+
+.date-wrap {
+  display: flex;
+  align-items: center;
+  button {
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+  }
+}
+
+.text-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $color-off-white;
+  .month-text {
+    font-size: 48px;
+    margin: 0 28px;
+    margin-bottom: 12px;
+  }
+  .year-text {
+    font-size: 24px;
+  }
+}
+
+.menu-wrap {
+  display: flex;
+  button {
+    width: 44px;
+    height: 44px;
+    svg {
+      height: 24px;
+      width: 24px;
+      path {
+        stroke: $color-line;
+      }
+    }
+  }
+  .active {
+    svg {
+      path {
+        stroke: $color-off-white;
+      }
+    }
+  }
+}

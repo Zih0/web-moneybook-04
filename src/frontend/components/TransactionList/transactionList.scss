@@ -1,0 +1,55 @@
+@import '../../styles/color.scss';
+@import '../../styles/text-style.scss';
+@import '../../styles/checkbox.scss';
+@import '../../styles/varibles.scss';
+
+.transaction-container {
+  @include user-select-none;
+
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
+.transaction-wrapper {
+  max-width: 848px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.transaction-list-header {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transaction-count-text {
+  @include body-large-text;
+  color: $color-primary-300;
+}
+
+.transaction-list-wrapper {
+  width: 100%;
+}
+
+.transaction-list-filter {
+  display: flex;
+  gap: 12px;
+
+  label {
+    @include body-medium-text;
+    color: $color-primary-300;
+
+    cursor: pointer;
+
+    &.unchecked {
+      color: $color-label;
+    }
+  }
+}

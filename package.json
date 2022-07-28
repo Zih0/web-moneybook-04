@@ -1,0 +1,54 @@
+{
+  "name": "web-moneybook-04",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "NODE_ENV=production node ./bin/www.js",
+    "dev": "NODE_ENV=development nodemon ./bin/www.js",
+    "build": "NODE_ENV=production webpack --config webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woowa-techcamp-2022/web-moneybook-04.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/woowa-techcamp-2022/web-moneybook-04/issues"
+  },
+  "homepage": "https://github.com/woowa-techcamp-2022/web-moneybook-04#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.18.6",
+    "@babel/core": "^7.18.6",
+    "@babel/plugin-proposal-function-bind": "^7.18.9",
+    "@babel/preset-env": "^7.18.6",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1",
+    "sass": "^1.53.0",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.73.0"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "core-js": "^3.23.5",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "svg-inline-loader": "^0.8.2",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-middleware": "^5.3.3",
+    "webpack-merge": "^5.8.0",
+    "zihorm": "^1.0.3-beta-3"
+  }
+}

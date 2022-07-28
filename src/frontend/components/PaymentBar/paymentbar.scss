@@ -1,0 +1,148 @@
+@import '../../styles/color.scss';
+@import '../../styles/typography.scss';
+@import '../../styles/text-style.scss';
+@import '../../styles/varibles.scss';
+
+.paymentbar-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 51px;
+}
+
+.form-wrapper {
+  margin-top: -32px;
+  padding: 8px 32px;
+  height: 194px;
+  max-width: 904px;
+  max-height: 76px;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: $color-off-white;
+
+  border: 1px solid $color-placeholder;
+  border-radius: 10px;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 4px 20px rgba(0, 0, 0, 0.1);
+
+  &:first-child {
+    border: none;
+  }
+}
+
+.form-element {
+  min-width: 120px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 0.2rem 24px;
+  border-left: 1px solid $color-placeholder;
+  &:nth-child(1) {
+    border: none;
+  }
+}
+
+.form-element-title {
+  @include user-select-none;
+  font-size: 0.9rem;
+  color: $color-primary-300;
+  width: 100%;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.3rem;
+}
+
+.price-input-wrapper {
+  @include body-regular-text;
+
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .form-element-input {
+    margin-right: 8px;
+
+    text-align: right;
+
+    background-color: $color-off-white;
+  }
+}
+
+.form-element-input {
+  @include body-regular-text;
+  width: 100%;
+  border: none;
+  background-color: $color-off-white;
+
+  &::placeholder {
+    color: $color-label;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.form-button {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px;
+  width: 40px;
+  height: 40px;
+
+  border: 2px solid $color-primary-200;
+  border-radius: 10px;
+  background-color: $color-off-white;
+  svg {
+    width: 24px;
+    path {
+      stroke: $color-primary-200;
+    }
+  }
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+
+  &.submit {
+    background-color: $color-primary-200;
+    svg {
+      width: 24px;
+      path {
+        stroke: $color-off-white;
+      }
+    }
+  }
+}
+
+.form-element-dropdown {
+  position: relative;
+}
+
+.select-dropdown {
+  @include user-select-none;
+  @include body-regular-text;
+
+  white-space: nowrap;
+  cursor: pointer;
+  line-height: 26px;
+
+  svg {
+    height: 16px;
+    width: 16px;
+  }
+}
