@@ -4,7 +4,7 @@ import { ROUTE } from '../utils/constants.js'
 import MainPage from '../pages/MainPage/MainPage.js'
 import CalendarPage from '../pages/CalendarPage/CalendarPage.js'
 import ChartPage from '../pages/ChartPage/ChartPage.js'
-import ErrorPage from '../pages/ErrorPage.js'
+import ErrorPage from '../pages/ErrorPage/ErrorPage.js'
 import { transactionListState } from '../stores/transactionStore.js'
 import { dateState } from '../stores/dateStore.js'
 import {
