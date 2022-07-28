@@ -24,6 +24,8 @@ const getCategorySixMonthTrend = async (year, month, category) => {
 
 const createTransactionAPI = async (body) => {
   const { data } = await fetcher.post('/transaction', body)
+
+  return data
 }
 
 const updateTransactionAPI = async (id, body) => {
