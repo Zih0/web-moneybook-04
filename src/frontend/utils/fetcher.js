@@ -42,7 +42,7 @@ const fetcher = {
   get: (url) => loadingWrapper(() => fetchWrapper(url, HTTP_METHOD.GET)),
   post: (url, body) => fetchWrapper(url, HTTP_METHOD.POST, body),
   put: (url, body) => fetchWrapper(url, HTTP_METHOD.PUT, body),
-  delete: (url, body) => fetchWrapper(url, HTTP_METHOD.DELETE),
+  delete: (url) => fetchWrapper(url, HTTP_METHOD.DELETE),
 }
 
 export default fetcher
