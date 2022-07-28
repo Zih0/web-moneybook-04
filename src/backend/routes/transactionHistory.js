@@ -5,6 +5,7 @@ import {
   getTransactionHistory,
   getSixMonthCategoryExpenseTransactionHistory,
   createTransaction,
+  updateTransaction,
 } from '../controllers/transactionHistory.js'
 
 const transactionRouter = express.Router()
@@ -15,5 +16,6 @@ transactionRouter.get('/category/six-month', getSixMonthCategoryExpenseTransacti
 transactionRouter.get('/category/detail', getCategoryExpenseDetailTransactionList)
 
 transactionRouter.post('/', createTransaction)
+transactionRouter.put('/:id', updateTransaction)
 
 export { transactionRouter }

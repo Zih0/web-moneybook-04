@@ -41,10 +41,17 @@ const createTransaction = async (req, res) => {
   res.status(200).send({ data })
 }
 
+const updateTransaction = async (req, res) => {
+  const { id } = req.params
+  await TransactionService.updateTransaction(id, req.body)
+  res.status(200).send()
+}
+
 export {
   getTransactionHistory,
   getExpenseTransactionHistory,
   getCategoryExpenseDetailTransactionList,
   getSixMonthCategoryExpenseTransactionHistory,
   createTransaction,
+  updateTransaction,
 }
