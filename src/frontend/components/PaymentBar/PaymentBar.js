@@ -36,7 +36,7 @@ export default class PaymentBar extends Component {
                 <span class='form-element-title'>분류</span>
             
                 <div class="form-element-dropdown">
-                    <div class="select-dropdown" id='category-select'>
+                    <div class="select-dropdown ${category ? 'selected' : ''}" id='category-select'>
                       ${category ? CATEGORY[category] : '선택하세요'}
                       ${rowArrow}
                     </div>
@@ -52,7 +52,9 @@ export default class PaymentBar extends Component {
                 <span class='form-element-title'>결제수단</span>
     
                  <div class="form-element-dropdown">
-                    <div class='select-dropdown' id='payment-select'>
+                    <div class='select-dropdown  ${
+                      paymentName ? 'selected' : ''
+                    }' id='payment-select'>
                       ${paymentName ? paymentName : '선택하세요'}
                       ${rowArrow}
                     </div>
