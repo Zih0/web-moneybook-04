@@ -4,7 +4,7 @@ import './paymentdropdown.scss'
 import removeIcon from '../../assets/removeIcon.svg'
 import AddPaymentModal from '../Modal/AddPaymentModal.js'
 import { openModal } from '../../utils/modal.js'
-import { createPayment } from '../../api/payment.js'
+import { createPayment, deletePaymentAPI } from '../../api/payment.js'
 
 export default class PaymentDropdown extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ export default class PaymentDropdown extends Component {
         ${payment
           .map(
             ({ id, name }) => ` <li class="dropdown-li" id=${id}>${name} 
-          <button>${removeIcon}</button>
+          <button class='payment-remove-button'>${removeIcon}</button>
           </li>`,
           )
           .join('')}
@@ -46,9 +46,19 @@ export default class PaymentDropdown extends Component {
   handleClickCategoryItem(e) {
     const $item = e.target.closest('.dropdown-li')
 
+    // 삭제 버튼 클릭한 경우
+    const $remove = e.target.closest('.payment-remove-button')
+    if ($remove) {
+      this.deletePayment($item.id)
+      return
+    }
+
+    //추가하기 버튼 클릭한 경우
     if ($item.classList.contains('create-li')) {
       openModal(new AddPaymentModal({ addPayment: this.addPayment.bind(this) }))
-    } else {
+    }
+    // li를 클릭한 경우
+    else {
       const paymentId = $item.id
       const paymentName = $item.innerText
       this.props.handleInputPaymentId(paymentId, paymentName)
@@ -61,6 +71,18 @@ export default class PaymentDropdown extends Component {
 
       this.setState({
         payment: [...this.state.payment, { id: data, name: paymentName }],
+      })
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  async deletePayment(id) {
+    try {
+      await deletePaymentAPI(id)
+      const filterPayment = this.state.payment.filter((payment) => payment.id !== id)
+      this.setState({
+        payment: [...filterPayment],
       })
     } catch (e) {
       console.error(e)
