@@ -35,7 +35,7 @@
 }
 
 .form-element {
-  min-width: 120px;
+  min-width: 140px;
 
   display: flex;
   flex-direction: column;
@@ -136,12 +136,17 @@
 .select-dropdown {
   @include user-select-none;
   @include body-regular-text;
-
+  position: relative;
   white-space: nowrap;
   cursor: pointer;
   line-height: 26px;
 
+  color: $color-label;
+
   svg {
+    position: absolute;
+    top: 6px;
+    right: 0;
     height: 16px;
     width: 16px;
   }
