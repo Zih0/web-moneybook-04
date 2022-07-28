@@ -1,5 +1,5 @@
 import path from 'path'
-
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 const __dirname = path.resolve()
 
 export default {
@@ -40,4 +40,11 @@ export default {
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'SF 가계부',
+      template: path.resolve(__dirname, 'public/index.html'),
+      favicon: path.resolve(__dirname, 'public/favicon.ico'),
+    }),
+  ],
 }
