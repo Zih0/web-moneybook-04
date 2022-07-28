@@ -3,8 +3,9 @@ import { closeModal } from '../../utils/modal.js'
 import './paymentModal.scss'
 
 export default class RemovePaymentModal extends Component {
-  removePayment() {
-    console.log('REMOVE PAYMENT')
+  async removePayment() {
+    const { id, deletePayment } = this.props
+    await deletePayment(id)
   }
 
   handleClickBackground() {
@@ -31,7 +32,7 @@ export default class RemovePaymentModal extends Component {
   }
 
   template() {
-    // const { selectedPayment } = this.props
+    const { name } = this.props
 
     return /*html*/ `
       <div class="modal-wrapper">
@@ -39,7 +40,7 @@ export default class RemovePaymentModal extends Component {
         <div class="modal-content">
           <div class="payment-modal-wrapper">
             <p class="payment-modal-title">해당 결제수단을 삭제하시겠습니까?</p>
-            <p class="payment-modal-input-text">props 자리</p>
+            <p class="payment-modal-input-text">${name}</p>
 
             <div class="payment-modal-button-wrapper">
               <button class="payment-modal-cancel-button">취소</button>

@@ -1,10 +1,11 @@
 import { Component } from '../../core/component.js'
 import { getPaymentList } from '../../api/payment.js'
-import './paymentdropdown.scss'
-import removeIcon from '../../assets/removeIcon.svg'
+import IconRemove from '../../assets/removeIcon.svg'
 import AddPaymentModal from '../Modal/AddPaymentModal.js'
+import RemovePaymentModal from '../Modal/RemovePaymentModal.js'
 import { openModal } from '../../utils/modal.js'
 import { createPayment, deletePaymentAPI } from '../../api/payment.js'
+import './paymentdropdown.scss'
 
 export default class PaymentDropdown extends Component {
   async initState() {
@@ -26,8 +27,8 @@ export default class PaymentDropdown extends Component {
       <ul class="dropdown-ul payment-select  ${isUpdate ? 'update' : ''}">
         ${payment
           .map(
-            ({ id, name }) => ` <li class="dropdown-li" id=${id}>${name} 
-          <button class='payment-remove-button'>${removeIcon}</button>
+            ({ id, name }) => ` <li class="dropdown-li" id=${id} name="${name}">${name} 
+          <button class='payment-remove-button'>${IconRemove}</button>
           </li>`,
           )
           .join('')}
@@ -47,7 +48,13 @@ export default class PaymentDropdown extends Component {
     // 삭제 버튼 클릭한 경우
     const $remove = e.target.closest('.payment-remove-button')
     if ($remove) {
-      this.deletePayment($item.id)
+      openModal(
+        new RemovePaymentModal({
+          id: $item.id,
+          name: $item.getAttribute('name'),
+          deletePayment: this.deletePayment.bind(this),
+        }),
+      )
       return
     }
 
@@ -55,6 +62,7 @@ export default class PaymentDropdown extends Component {
     if ($item.classList.contains('create-li')) {
       openModal(new AddPaymentModal({ addPayment: this.addPayment.bind(this) }))
     }
+
     // li를 클릭한 경우
     else {
       const paymentId = $item.id
