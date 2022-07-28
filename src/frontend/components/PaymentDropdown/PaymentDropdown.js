@@ -7,9 +7,6 @@ import { openModal } from '../../utils/modal.js'
 import { createPayment, deletePaymentAPI } from '../../api/payment.js'
 
 export default class PaymentDropdown extends Component {
-  constructor(props) {
-    super(props)
-  }
   async initState() {
     this.state = {
       payment: [],
@@ -23,9 +20,10 @@ export default class PaymentDropdown extends Component {
   }
 
   template() {
+    const { isUpdate } = this.props
     const { payment } = this.state
     return /*html*/ `
-      <ul class="dropdown-ul payment-select">
+      <ul class="dropdown-ul payment-select  ${isUpdate ? 'update' : ''}">
         ${payment
           .map(
             ({ id, name }) => ` <li class="dropdown-li" id=${id}>${name} 

@@ -2,6 +2,8 @@
 @import '../../styles/text-style.scss';
 
 .dropdown-ul {
+  z-index: 1002;
+
   overflow: hidden;
 
   position: absolute;
@@ -23,6 +25,13 @@
 
   &.active {
     display: block;
+  }
+
+  &.update {
+    left: 0;
+    width: 100%;
+    max-height: 400px;
+    overflow-y: auto;
   }
 }
 
