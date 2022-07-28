@@ -193,9 +193,9 @@ export default class PaymentBar extends Component {
   }
 
   // 결제수단 입력 폼
-  handleInputPaymentId(payment_id, paymentName) {
+  handleInputPaymentId(paymentId, paymentName) {
     this.setState({
-      payment_id,
+      payment_id: paymentId,
       paymentName,
     })
     this.checkFormButton()

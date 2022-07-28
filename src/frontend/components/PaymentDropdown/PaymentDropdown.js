@@ -49,9 +49,9 @@ export default class PaymentDropdown extends Component {
     if ($item.classList.contains('create-li')) {
       openModal(new AddPaymentModal({ addPayment: this.addPayment.bind(this) }))
     } else {
-      const payment_id = $item.id
+      const paymentId = $item.id
       const paymentName = $item.innerText
-      this.props.handleInputPaymentId(payment_id, paymentName)
+      this.props.handleInputPaymentId(paymentId, paymentName)
     }
   }
 
