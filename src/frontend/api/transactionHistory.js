@@ -26,9 +26,14 @@ const createTransactionAPI = async (body) => {
   const { data } = await fetcher.post('/transaction', body)
 }
 
+const updateTransactionAPI = async (id, body) => {
+  await fetcher.put(`/transaction/${id}`, body)
+}
+
 export {
   getTransactionHistoryList,
   getExpenseTransactionHistoryList,
   getCategorySixMonthTrend,
   createTransactionAPI,
+  updateTransactionAPI,
 }

@@ -3,13 +3,10 @@ import { CATEGORY_INCOME, CATEGORY_EXPENSE } from '../../utils/constants.js'
 import './categorydropdown.scss'
 
 export default class CategoryDropdown extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   template() {
+    const { isUpdate } = this.props
     return /*html*/ `
-      <ul class="dropdown-ul category-select">
+      <ul class="dropdown-ul category-select ${isUpdate ? 'update' : ''}">
         <div class="dropdown-title expense">지출</div>
         ${Object.keys(CATEGORY_EXPENSE)
           .map((key) => ` <li class="dropdown-li false" id=${key}>${CATEGORY_EXPENSE[key]}</li>`)
