@@ -2,6 +2,9 @@ import { Component } from '../../core/component.js'
 import { getPaymentList } from '../../api/payment.js'
 import './paymentdropdown.scss'
 import removeIcon from '../../assets/removeIcon.svg'
+import AddPaymentModal from '../Modal/AddPaymentModal.js'
+import { openModal } from '../../utils/modal.js'
+import { createPayment } from '../../api/payment.js'
 
 export default class PaymentDropdown extends Component {
   constructor(props) {
@@ -44,11 +47,23 @@ export default class PaymentDropdown extends Component {
     const $item = e.target.closest('.dropdown-li')
 
     if ($item.classList.contains('create-li')) {
-      // 모달 호출
+      openModal(new AddPaymentModal({ addPayment: this.addPayment.bind(this) }))
     } else {
       const payment_id = $item.id
       const paymentName = $item.innerText
       this.props.handleInputPaymentId(payment_id, paymentName)
+    }
+  }
+
+  async addPayment(paymentName) {
+    try {
+      const data = await createPayment({ name: paymentName })
+
+      this.setState({
+        payment: [...this.state.payment, { id: data, name: paymentName }],
+      })
+    } catch (e) {
+      console.error(e)
     }
   }
 }
