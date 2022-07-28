@@ -10,4 +10,8 @@ const createPayment = async (body) => {
   return data
 }
 
-export { getPaymentList, createPayment }
+const deletePaymentAPI = async (id) => {
+  await fetcher.delete(`/payment/${id}`)
+}
+
+export { getPaymentList, createPayment, deletePaymentAPI }
