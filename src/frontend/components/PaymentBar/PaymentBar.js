@@ -144,10 +144,6 @@ export default class PaymentBar extends Component {
   checkFormButton() {
     const check = Object.values(this.state).every((state) => state !== '' && state !== 0)
 
-    this.setState({
-      disabled: !check,
-    })
-
     if (check) {
       this.querySelector('.form-button').classList.add('submit')
     } else {
