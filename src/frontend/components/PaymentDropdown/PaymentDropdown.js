@@ -70,7 +70,7 @@ export default class PaymentDropdown extends Component {
       const data = await createPayment({ name: paymentName })
 
       this.setState({
-        payment: [...this.state.payment, { id: data, name: paymentName }],
+        payment: [...this.state.payment, { id: data.id, name: paymentName }],
       })
     } catch (e) {
       console.error(e)
@@ -80,7 +80,7 @@ export default class PaymentDropdown extends Component {
   async deletePayment(id) {
     try {
       await deletePaymentAPI(id)
-      const filterPayment = this.state.payment.filter((payment) => payment.id !== id)
+      const filterPayment = this.state.payment.filter((payment) => payment.id !== Number(id))
       this.setState({
         payment: [...filterPayment],
       })
