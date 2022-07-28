@@ -2,16 +2,17 @@
 @import '../../styles/text-style.scss';
 
 .dropdown-ul {
-  z-index: 1002;
+  z-index: 1000;
 
   overflow: hidden;
+  overflow-y: auto;
 
   position: absolute;
   top: 48px;
   left: -24px;
 
   width: 122px;
-
+  max-height: 630px;
   display: none;
 
   background-color: $color-off-white;
@@ -53,6 +54,8 @@
 
 .dropdown-li {
   @include body-regular-text;
+
+  cursor: pointer;
 
   padding: 16px 24px;
 

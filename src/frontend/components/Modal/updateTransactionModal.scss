@@ -91,6 +91,7 @@
 
 .transaction-form-dropdown {
   @include body-medium-text;
+  position: relative;
   padding: 10px;
   width: 100%;
 
