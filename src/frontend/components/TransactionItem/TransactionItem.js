@@ -7,13 +7,14 @@ import './transactionItem.scss'
 
 export default class TransactionItem extends Component {
   handleClickItem() {
-    const { id, category, title, payment, price, paymentDate } = this.props
+    const { id, category, title, paymentId, payment, price, paymentDate } = this.props
 
     openModal(
       new UpdateTransactionModal({
         id,
         title,
         category,
+        paymentId,
         payment,
         price,
         paymentDate,
