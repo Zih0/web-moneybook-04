@@ -25,18 +25,13 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use(
-  '/dist',
-  Middleware(compiler, {
-    // webpack-dev-middleware options
-  }),
-)
+app.use('/', Middleware(compiler, {}))
 
 app.use('/api/transaction', transactionRouter)
 app.use('/api/payment', paymentRouter)
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, `public/index.html`))
+  res.sendFile(path.resolve(__dirname, 'public/dist/index.html'))
 })
 
 export default app
