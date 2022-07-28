@@ -1,5 +1,5 @@
 import { Component } from '../../core/component.js'
-import { getState, subscribe } from '../../core/observer.js'
+import { getState, subscribe, unsubscribeAll } from '../../core/observer.js'
 import { transactionListState } from '../../stores/transactionStore.js'
 import { calculateTransaction, classifyTransactionDataByDate } from '../../utils/transactionUtil.js'
 import DateTransactionList from '../DateTransactionList/DateTransactionList.js'
@@ -11,7 +11,7 @@ import { priceToString } from '../../utils/stringUtil.js'
 export default class TransactionList extends Component {
   constructor(props) {
     super(props)
-
+    unsubscribeAll(transactionListState)
     subscribe(transactionListState, this.render.bind(this))
   }
 

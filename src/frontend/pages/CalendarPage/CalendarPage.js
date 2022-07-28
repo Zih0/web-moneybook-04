@@ -1,6 +1,6 @@
 import { Component } from '../../core/component.js'
 import { getMonthData } from '../../utils/calendar.js'
-import { getState, subscribe } from '../../core/observer.js'
+import { getState, subscribe, unsubscribeAll } from '../../core/observer.js'
 import { dateState } from '../../stores/dateStore.js'
 import { KR_WEEK } from '../../utils/constants.js'
 import { calculateTransaction, classifyTransactionDataByDate } from '../../utils/transactionUtil.js'
@@ -12,6 +12,7 @@ import './calendarPage.scss'
 export default class CalendarPage extends Component {
   constructor() {
     super()
+    unsubscribeAll(transactionListState)
     subscribe(transactionListState, this.render.bind(this))
   }
   template() {

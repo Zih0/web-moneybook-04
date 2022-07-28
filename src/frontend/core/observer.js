@@ -14,7 +14,13 @@ const subscribe = (key, observer) => store[key]._observers.add(observer)
  * @param {function} observer 리렌더링 함수
  */
 const unsubscribe = (key, observer) => {
-  store[key]._observers = [...store[key]._observers].filter((subscriber) => subscriber !== observer)
+  store[key]._observers = new Set(
+    [...store[key]._observers].filter((subscriber) => subscriber !== observer),
+  )
+}
+
+const unsubscribeAll = (key) => {
+  store[key]._observers = new Set()
 }
 
 /**
@@ -54,4 +60,4 @@ const setState = (key) => (newState) => {
   notify(key)
 }
 
-export { subscribe, unsubscribe, initState, getState, setState }
+export { subscribe, unsubscribe, unsubscribeAll, initState, getState, setState }
