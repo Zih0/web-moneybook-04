@@ -5,7 +5,7 @@ import { getBeforeSixMonthDate, fillZero, getMonthsObject } from '../utils/dateU
 
 const TransactionService = {
   // 메인, 달력 페이지를 위한 get 요청, 수입,지출 거래 내역
-  getTransactionList: async (year, month) => {
+  async getTransactionList(year, month) {
     const response = await TransactionHistory.findAll({
       attributes: [
         'transaction_history.id',
@@ -35,7 +35,7 @@ const TransactionService = {
   },
 
   // 도넛차트를 위한 get 요청, 매달 카테고리별 지출 내역
-  getExpenseTransactionList: async (year, month) => {
+  async getExpenseTransactionList(year, month) {
     const response = await TransactionHistory.findAll({
       attributes: ['category', 'ABS(SUM(price)) as price'],
       where: {
@@ -53,7 +53,7 @@ const TransactionService = {
   },
 
   // 카테고리별 상세 지출 내역 가져오기 위한 get 요청
-  getCategoryExpenseTransactionList: async (year, month, category) => {
+  async getCategoryExpenseTransactionList(year, month, category) {
     const response = await TransactionHistory.findAll({
       attributes: [
         'transaction_history.id',
@@ -84,7 +84,7 @@ const TransactionService = {
   },
 
   // 라인차트를 위한 get 요청, 최근 6개월 데이터
-  getSixMonthCategoryExpenseTransactionList: async (year, month, category) => {
+  async getSixMonthCategoryExpenseTransactionList(year, month, category) {
     const [startYear, startMonth] = getBeforeSixMonthDate(year, month)
 
     const endDate = new Date(year, month, 0).getDate()
@@ -111,7 +111,7 @@ const TransactionService = {
     return monthsData
   },
 
-  createTransaction: async (data) => {
+  async createTransaction(data) {
     const { paymentDate, category, title, payment_id, price } = data
     const response = await TransactionHistory.create({
       payment_date: paymentDate,
@@ -122,6 +122,13 @@ const TransactionService = {
     })
 
     return response
+  },
+  async updateTransaction(id, data) {
+    await TransactionHistory.update(data, {
+      where: {
+        id,
+      },
+    })
   },
 }
 
