@@ -46,6 +46,7 @@ export default class DateTransactionList extends Component {
           id: transactionItem.id,
           category: transactionItem.category,
           title: transactionItem.title,
+          paymentId: transactionItem.payment_id,
           payment: transactionItem.payment,
           price: transactionItem.price,
           isEditable: this.props.isEditable ?? false,
