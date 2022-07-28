@@ -5,4 +5,9 @@ const getPaymentList = async () => {
   return data
 }
 
-export { getPaymentList }
+const createPayment = async (body) => {
+  const { data } = await fetcher.post('/payment', body)
+  return data
+}
+
+export { getPaymentList, createPayment }
