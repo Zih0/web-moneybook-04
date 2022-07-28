@@ -1,0 +1,29 @@
+@import '../../styles/color.scss';
+
+.fab-wrapper {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+
+  padding: 12px;
+  display: none;
+
+  cursor: pointer;
+
+  border-radius: 50%;
+
+  background-color: $color-primary-200;
+
+  &.active {
+    display: block;
+  }
+
+  svg {
+    width: 30px;
+    height: 30px;
+
+    path {
+      stroke: $color-off-white;
+    }
+  }
+}
