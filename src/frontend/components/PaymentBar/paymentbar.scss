@@ -79,7 +79,7 @@
 
 .form-element-input {
   @include body-regular-text;
-  width: 100%;
+  width: 100px;
   border: none;
   background-color: $color-off-white;
 
@@ -104,9 +104,12 @@
   width: 40px;
   height: 40px;
 
+  cursor: default;
+
   border: 2px solid $color-primary-200;
   border-radius: 10px;
   background-color: $color-off-white;
+
   svg {
     width: 24px;
     path {
@@ -114,11 +117,8 @@
     }
   }
 
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-
   &.submit {
+    cursor: pointer;
     background-color: $color-primary-200;
     svg {
       width: 24px;
@@ -142,6 +142,10 @@
   line-height: 26px;
 
   color: $color-label;
+
+  &.selected {
+    color: $color-title-active;
+  }
 
   svg {
     position: absolute;
