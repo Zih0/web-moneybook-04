@@ -80,10 +80,9 @@ export default class PaymentDropdown extends Component {
   async deletePayment(id) {
     try {
       await deletePaymentAPI(id)
-      const filterPayment = this.state.payment.filter((payment) => payment.id !== Number(id))
-      this.setState({
-        payment: [...filterPayment],
-      })
+      const paymentList = getState(paymentListState)
+      const filterPayment = paymentList.filter((payment) => payment.id !== Number(id))
+      this.setPaymentList([...filterPayment])
     } catch (e) {
       console.error(e)
     }
