@@ -8,17 +8,10 @@ import IconMinus from '../../assets/minus.svg'
 import { CATEGORY } from '../../utils/constants.js'
 import { priceToString, replaceDateDash } from '../../utils/stringUtil.js'
 import { updateTransactionAPI } from '../../api/transactionHistory.js'
-import { getState, setState } from '../../core/observer.js'
 import { transactionListState } from '../../stores/transactionStore.js'
 import { sortTransaction } from '../../utils/transactionUtil.js'
 
 export default class UpdateTransactionModal extends Component {
-  constructor(props) {
-    super(props)
-
-    this.setTransactionList = setState(transactionListState)
-  }
-
   initState() {
     const { category, paymentId, payment, price } = this.props
 
