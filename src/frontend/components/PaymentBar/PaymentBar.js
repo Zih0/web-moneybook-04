@@ -9,12 +9,11 @@ import PaymentDropdown from '../PaymentDropdown/PaymentDropdown.js'
 import { priceToString, todayDate } from '../../utils/stringUtil.js'
 import { createTransactionAPI } from '../../api/transactionHistory.js'
 import { getState, setState } from '../../core/observer.js'
-import { transactionListState } from '../../stores/transactionStore.js'
+import { transactionListState, paymentListState } from '../../stores/transactionStore.js'
 
 export default class PaymentBar extends Component {
   constructor() {
     super()
-
     this.setTransaction = setState(transactionListState)
   }
 
@@ -112,7 +111,9 @@ export default class PaymentBar extends Component {
 
     const $paymentDropdownElement = this.querySelector('.category-dropdown-payment')
     $paymentDropdownElement.appendChild(
-      new PaymentDropdown({ handleInputPaymentId: this.handleInputPaymentId.bind(this) }),
+      new PaymentDropdown({
+        handleInputPaymentId: this.handleInputPaymentId.bind(this),
+      }),
     )
   }
 
@@ -147,7 +148,6 @@ export default class PaymentBar extends Component {
       }
 
       this.setTransaction([...transactionList, setData])
-      debugger
     } catch (e) {
       console.error(e)
     }
