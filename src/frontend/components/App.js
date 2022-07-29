@@ -4,7 +4,7 @@ import { ROUTE } from '../utils/constants.js'
 import MainPage from '../pages/MainPage/MainPage.js'
 import CalendarPage from '../pages/CalendarPage/CalendarPage.js'
 import ChartPage from '../pages/ChartPage/ChartPage.js'
-import ErrorPage from '../pages/ErrorPage.js'
+import ErrorPage from '../pages/ErrorPage/ErrorPage.js'
 import { transactionListState } from '../stores/transactionStore.js'
 import { dateState } from '../stores/dateStore.js'
 import {
@@ -13,12 +13,19 @@ import {
 } from '../api/transactionHistory.js'
 import { getState, setState, subscribe } from '../core/observer.js'
 import { expenseTransactionListState } from '../stores/chartStore.js'
+import { getPaymentList } from '../api/payment.js'
+import { paymentListState } from '../stores/transactionStore.js'
 
 export default class App extends Component {
   constructor() {
     super()
-
     subscribe(dateState, this.render.bind(this))
+    this.setPaymentList = setState(paymentListState)
+  }
+
+  async initState() {
+    const paymentList = await getPaymentList()
+    this.setPaymentList(paymentList)
   }
 
   route() {

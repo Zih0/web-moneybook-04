@@ -8,8 +8,15 @@ import CategoryDropdown from '../CategoryDropdown/CategoryDropdown.js'
 import PaymentDropdown from '../PaymentDropdown/PaymentDropdown.js'
 import { priceToString, todayDate } from '../../utils/stringUtil.js'
 import { createTransactionAPI } from '../../api/transactionHistory.js'
+import { getState, setState } from '../../core/observer.js'
+import { transactionListState, paymentListState } from '../../stores/transactionStore.js'
 
 export default class PaymentBar extends Component {
+  constructor() {
+    super()
+    this.setTransaction = setState(transactionListState)
+  }
+
   initState() {
     this.state = {
       paymentDate: todayDate(),
@@ -36,7 +43,7 @@ export default class PaymentBar extends Component {
                 <span class='form-element-title'>분류</span>
             
                 <div class="form-element-dropdown">
-                    <div class="select-dropdown" id='category-select'>
+                    <div class="select-dropdown ${category ? 'selected' : ''}" id='category-select'>
                       ${category ? CATEGORY[category] : '선택하세요'}
                       ${rowArrow}
                     </div>
@@ -52,7 +59,9 @@ export default class PaymentBar extends Component {
                 <span class='form-element-title'>결제수단</span>
     
                  <div class="form-element-dropdown">
-                    <div class='select-dropdown' id='payment-select'>
+                    <div class='select-dropdown  ${
+                      paymentName ? 'selected' : ''
+                    }' id='payment-select'>
                       ${paymentName ? paymentName : '선택하세요'}
                       ${rowArrow}
                     </div>
@@ -102,25 +111,46 @@ export default class PaymentBar extends Component {
 
     const $paymentDropdownElement = this.querySelector('.category-dropdown-payment')
     $paymentDropdownElement.appendChild(
-      new PaymentDropdown({ handleInputPaymentId: this.handleInputPaymentId.bind(this) }),
+      new PaymentDropdown({
+        handleInputPaymentId: this.handleInputPaymentId.bind(this),
+      }),
     )
   }
 
-  submitForm(e) {
+  async submitForm(e) {
     const result = e.target.closest('.submit')
     if (!result) return
 
-    const { paymentDate, category, title, payment_id, price, option } = this.state
+    const { paymentDate, category, title, payment_id, paymentName, price, option } = this.state
     let tmpPrice = Number(price.replace(/,/g, ''))
     tmpPrice = option ? tmpPrice : -tmpPrice
-    const data = {
+
+    const submitData = {
       paymentDate,
       category,
       title,
       payment_id,
       price: tmpPrice,
     }
-    createTransactionAPI(data)
+
+    try {
+      const { insertId } = await createTransactionAPI(submitData)
+      const transactionList = getState(transactionListState)
+      const setData = {
+        category,
+        id: insertId,
+        is_deleted: 0,
+        payment: paymentName,
+        payment_date: paymentDate,
+        payment_id: payment_id,
+        price: tmpPrice,
+        title: title,
+      }
+
+      this.setTransaction([...transactionList, setData])
+    } catch (e) {
+      console.error(e)
+    }
 
     this.setState({
       paymentDate: todayDate(),

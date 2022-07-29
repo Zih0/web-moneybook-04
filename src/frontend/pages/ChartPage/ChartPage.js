@@ -2,7 +2,7 @@ import DateTransactionList from '../../components/DateTransactionList/DateTransa
 import DoughnutChart from '../../components/DoughnutChart/DoughnutChart.js'
 import LineChart from '../../components/LineChart/LineChart.js'
 import { Component } from '../../core/component.js'
-import { getState, subscribe } from '../../core/observer.js'
+import { getState, subscribe, unsubscribeAll } from '../../core/observer.js'
 import { selectedCategoryState } from '../../stores/chartStore.js'
 import { transactionListState } from '../../stores/transactionStore.js'
 import { classifyTransactionDataByDate } from '../../utils/transactionUtil.js'
@@ -12,6 +12,7 @@ export default class ChartPage extends Component {
   constructor() {
     super()
 
+    unsubscribeAll(transactionListState)
     subscribe(transactionListState, this.render.bind(this))
     subscribe(selectedCategoryState, this.render.bind(this))
   }

@@ -1,28 +1,23 @@
 import { Component } from '../../core/component.js'
-import { getPaymentList } from '../../api/payment.js'
 import IconRemove from '../../assets/removeIcon.svg'
 import AddPaymentModal from '../Modal/AddPaymentModal.js'
 import RemovePaymentModal from '../Modal/RemovePaymentModal.js'
 import { openModal } from '../../utils/modal.js'
 import { createPayment, deletePaymentAPI } from '../../api/payment.js'
+import { getState, setState, subscribe } from '../../core/observer.js'
+import { paymentListState } from '../../stores/transactionStore.js'
 import './paymentdropdown.scss'
 
 export default class PaymentDropdown extends Component {
-  async initState() {
-    this.state = {
-      payment: [],
-    }
-
-    const data = await getPaymentList()
-
-    this.setState({
-      payment: data,
-    })
+  constructor(props) {
+    super(props)
+    subscribe(paymentListState, this.render.bind(this))
+    this.setPaymentList = setState(paymentListState)
   }
 
   template() {
     const { isUpdate } = this.props
-    const { payment } = this.state
+    const payment = getState(paymentListState)
     return /*html*/ `
       <ul class="dropdown-ul payment-select  ${isUpdate ? 'update' : ''}">
         ${payment
@@ -75,9 +70,8 @@ export default class PaymentDropdown extends Component {
     try {
       const data = await createPayment({ name: paymentName })
 
-      this.setState({
-        payment: [...this.state.payment, { id: data.id, name: paymentName }],
-      })
+      const payment = getState(paymentListState)
+      this.setPaymentList([...payment, { id: data.id, name: paymentName }])
     } catch (e) {
       console.error(e)
     }
@@ -86,10 +80,9 @@ export default class PaymentDropdown extends Component {
   async deletePayment(id) {
     try {
       await deletePaymentAPI(id)
-      const filterPayment = this.state.payment.filter((payment) => payment.id !== Number(id))
-      this.setState({
-        payment: [...filterPayment],
-      })
+      const paymentList = getState(paymentListState)
+      const filterPayment = paymentList.filter((payment) => payment.id !== Number(id))
+      this.setPaymentList([...filterPayment])
     } catch (e) {
       console.error(e)
     }

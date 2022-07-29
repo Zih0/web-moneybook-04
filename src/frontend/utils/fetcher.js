@@ -1,6 +1,6 @@
 import { closeLoading, openLoading } from './modal.js'
 
-const BASE_URL = 'http://13.209.183.185:3000/api'
+const BASE_URL = 'http://13.209.183.185/api'
 
 const HTTP_METHOD = {
   GET: 'GET',

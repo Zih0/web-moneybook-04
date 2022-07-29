@@ -8,14 +8,13 @@ import IconMinus from '../../assets/minus.svg'
 import { CATEGORY } from '../../utils/constants.js'
 import { priceToString, replaceDateDash } from '../../utils/stringUtil.js'
 import { updateTransactionAPI } from '../../api/transactionHistory.js'
-import { getState, setState } from '../../core/observer.js'
 import { transactionListState } from '../../stores/transactionStore.js'
 import { sortTransaction } from '../../utils/transactionUtil.js'
+import { getState, setState } from '../../core/observer.js'
 
 export default class UpdateTransactionModal extends Component {
   constructor(props) {
     super(props)
-
     this.setTransactionList = setState(transactionListState)
   }
 
@@ -178,7 +177,7 @@ export default class UpdateTransactionModal extends Component {
             <input id="transaction-date-input" class="transaction-form-input" placeholder="입력하세요" maxLength="10" value="${paymentDate}" />
             <label>분류</label>
             <div class="transaction-form-dropdown">
-              <div class="select-dropdown" id='category-select'>
+              <div class="select-dropdown ${category ? 'selected' : ''}" id='category-select'>
               ${category ? CATEGORY[category] : '선택하세요'}
               </div>
               <div class="dropdown-category"></div>
@@ -187,7 +186,7 @@ export default class UpdateTransactionModal extends Component {
             <input id='transaction-title-input' class="transaction-form-input" placeholder="입력하세요"  value="${title}" />
             <label>결제수단</label>
             <div class="transaction-form-dropdown">
-              <div class='select-dropdown' id='payment-select'>
+              <div class='select-dropdown ${paymentName ? 'selected' : ''}' id='payment-select'>
               ${paymentName ? paymentName : '선택하세요'}
               </div>
               <div class="dropdown-payment"></div>

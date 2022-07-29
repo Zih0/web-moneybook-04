@@ -1,0 +1,56 @@
+@import '../../styles/typography.scss';
+@import '../../styles/text-style.scss';
+@import '../../styles/color.scss';
+
+.error-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.error-header {
+  @include body-large-text;
+  font-family: $font-display;
+
+  img {
+    height: 40px;
+  }
+}
+
+.error-image {
+  margin-top: 40px;
+  width: 100px;
+}
+
+.error-title {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 48px;
+}
+
+.error-desc {
+  color: $color-body;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.home-button {
+  margin-top: 24px;
+  padding: 16px 0;
+  width: 300px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  background-color: $color-primary-200;
+  color: $color-off-white;
+}

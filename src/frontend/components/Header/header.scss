@@ -23,6 +23,10 @@ header {
 button {
   background-color: transparent;
   border: none;
+
+  &.file-text img {
+    height: 40px;
+  }
 }
 
 .logo {
