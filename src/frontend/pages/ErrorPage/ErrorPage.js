@@ -7,7 +7,9 @@ export default class ErrorPage extends Component {
     return /*html*/ `
     <div class="error-wrapper">
        <div class="error-main">
-        <h3 class="error-header">우아한 가계부</h3>
+        <h3 class="error-header">
+          <img src="https://user-images.githubusercontent.com/60956392/181659935-fe4e119b-7c33-4352-a51c-a46dcbded022.png" />
+        </h3>
         <img class="error-image" src="https://ceo-cdn.baemin.com/cdn/ceo-square/src/images/magnifying.png?ver=593ac352e19a5c63bf509dfe61179dd2" alt="not-found" />
         <p class="error-title">요청하신 페이지를</p>
         <p class="error-title">찾을 수 없습니다</p>

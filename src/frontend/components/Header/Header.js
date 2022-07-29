@@ -25,7 +25,9 @@ export default class Header extends Component {
     <header>
       <div class='header-container'>
         <div class='logo route'>
-          <button class='file-text'>우아한 가계부</button>
+          <button class='file-text'>
+            <img src="https://user-images.githubusercontent.com/60956392/181659707-97891d72-5069-4a82-ab05-5a3db16eb8ea.png" />
+          </button>
         </div>
 
         <div class='date-wrap'>

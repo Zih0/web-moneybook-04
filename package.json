@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=production node ./bin/www.js",
+    "start": "NODE_ENV=production npm run build && node ./bin/www.js",
     "dev": "NODE_ENV=development nodemon ./bin/www.js",
     "build": "NODE_ENV=production webpack --config webpack.prod.js"
   },
