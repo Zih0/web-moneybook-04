@@ -19,6 +19,43 @@
 
 MoneyBook is a two-week full stack project.
 
+## Getting Started
+
+### Clone Repository
+
+```
+git clone https://github.com/woowa-techcamp-2022/web-todo-08.git
+```
+
+### install Packages
+
+```
+npm install
+```
+
+### create env file
+
+```
+// .env
+MYSQL_HOST=""
+MYSQL_USER=""
+MYSQL_PW=""
+MYSQL_DB=""
+```
+
+### run application
+
+- development mode
+
+```
+npm run dev
+```
+
+- production mode
+
+```
+npm run start
+```
 
 ## Tech Stacks
 
