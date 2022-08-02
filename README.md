@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-   Design. Develop. Deploy.
+   Moneybook. Calendar. Chart.
 </p>
 
 <p align="center">
@@ -19,11 +19,6 @@
 
 MoneyBook is a two-week full stack project.
 
-Management accounting made easy, know your cash flow & work book balance.
-
-No need to calculate your daily sales cash balance manually.
-
-It will help you reconcile finance easily and maintain a record book.
 
 ## Tech Stacks
 
@@ -35,6 +30,14 @@ It will help you reconcile finance easily and maintain a record book.
 ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+
+## Screenshots
+![main-page](https://user-images.githubusercontent.com/60956392/182305121-419852a7-ccac-413f-884e-972739205e77.png)
+
+![calendar-page](https://user-images.githubusercontent.com/60956392/182305141-f528ac48-7cd8-417d-bbd1-0e20167946fd.png)
+
+![chart-page](https://user-images.githubusercontent.com/60956392/182305163-61ae37ed-c3fc-4d2f-b03b-f5d6b94f2ea6.png)
+
 
 ### Contributors
 
